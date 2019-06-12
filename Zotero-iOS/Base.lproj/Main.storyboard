@@ -30,10 +30,18 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuV-Sn-wt7">
+                                <rect key="frame" x="190.5" y="272" width="33" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Mg1-6h-7dy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0Pr-GB-8vI"/>
+                            <constraint firstItem="nuV-Sn-wt7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7DS-Rn-GdJ"/>
+                            <constraint firstItem="Mg1-6h-7dy" firstAttribute="top" secondItem="nuV-Sn-wt7" secondAttribute="bottom" constant="134" id="EJ6-ZF-JKr"/>
                             <constraint firstItem="Mg1-6h-7dy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Iyl-o9-C3K"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
