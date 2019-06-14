@@ -24,7 +24,10 @@ class ViewController: UIViewController {
 
     //MARK: IBAction
     @IBAction func ButtonPressEdit(_ sender: Any) {
+        // Debug
         print("Button Test")
+        // Toggle if field is editable
+        DocumentName.allowsEditingTextAttributes = !DocumentName.allowsEditingTextAttributes
     }
 }
 
