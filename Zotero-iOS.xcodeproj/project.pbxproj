@@ -14,6 +14,7 @@
 		93B4748722AF504000A0C17E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B4748522AF504000A0C17E /* LaunchScreen.storyboard */; };
 		93B4749222AF504000A0C17E /* Zotero_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4749122AF504000A0C17E /* Zotero_iOSTests.swift */; };
 		93B4749D22AF504000A0C17E /* Zotero_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4749C22AF504000A0C17E /* Zotero_iOSUITests.swift */; };
+		93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		93B4749822AF504000A0C17E /* Zotero-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zotero-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B4749C22AF504000A0C17E /* Zotero_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zotero_iOSUITests.swift; sourceTree = "<group>"; };
 		93B4749E22AF504000A0C17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				93B4748322AF504000A0C17E /* Assets.xcassets */,
 				93B4748522AF504000A0C17E /* LaunchScreen.storyboard */,
 				93B4748822AF504000A0C17E /* Info.plist */,
+				93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */,
 			);
 			path = "Zotero-iOS";
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				93B4747F22AF503F00A0C17E /* ViewController.swift in Sources */,
 				93B4747D22AF503F00A0C17E /* AppDelegate.swift in Sources */,
+				93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
