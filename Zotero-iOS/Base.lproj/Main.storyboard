@@ -129,28 +129,37 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Document Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uk0-iL-O3i">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uk0-iL-O3i">
                                             <rect key="frame" x="20" y="11" width="129" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20e-cT-RYg">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20e-cT-RYg">
                                             <rect key="frame" x="20" y="49" width="34" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2Q-pj-201">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2Q-pj-201">
                                             <rect key="frame" x="127" y="48" width="52" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="20e-cT-RYg" firstAttribute="leading" secondItem="hTK-U3-n6t" secondAttribute="leadingMargin" id="1uN-ft-mBj"/>
+                                        <constraint firstItem="20e-cT-RYg" firstAttribute="top" secondItem="Uk0-iL-O3i" secondAttribute="bottom" constant="17" id="5qV-1m-ZPs"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="x2Q-pj-201" secondAttribute="bottom" constant="10" id="6w0-1h-Mmb"/>
+                                        <constraint firstItem="x2Q-pj-201" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="20e-cT-RYg" secondAttribute="trailing" symbolic="YES" id="Aqd-BR-rXJ"/>
+                                        <constraint firstItem="x2Q-pj-201" firstAttribute="top" secondItem="Uk0-iL-O3i" secondAttribute="bottom" constant="16" id="FaY-iw-q3P"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="x2Q-pj-201" secondAttribute="trailing" constant="215" id="UkN-5r-B5o"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="20e-cT-RYg" secondAttribute="bottom" constant="9" id="e1P-xj-qqO"/>
+                                        <constraint firstItem="Uk0-iL-O3i" firstAttribute="top" secondItem="hTK-U3-n6t" secondAttribute="topMargin" id="k7N-lI-XD9"/>
+                                        <constraint firstItem="Uk0-iL-O3i" firstAttribute="leading" secondItem="hTK-U3-n6t" secondAttribute="leadingMargin" id="lHe-pZ-6Cb"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Uk0-iL-O3i" secondAttribute="trailing" id="m9t-Xc-Wbp"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="ItemAuthor" destination="x2Q-pj-201" id="3MM-Pp-Mmz"/>
