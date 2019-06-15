@@ -39,6 +39,11 @@ class ViewWithTableViewController: UIViewController,
         
         // Load Data
         loadFakeData()
+        
+        // Connect to the database please
+        let dbUrl = Bundle.main.url(forResource: "zotero", withExtension: "sqlite")!
+        let dbPath = dbUrl.path
+        print(dbPath)
     }
     
     // Mark: Private Methods
