@@ -78,17 +78,17 @@ class ViewWithTableViewController: UIViewController,
             self.navigationController?.pushViewController(vc!, animated: true)
         }
         else{
-            HideLeftMenu()
+            ToggleLeftMenu()
         }
     }
     
     //Mark: Actions
     
     @IBAction func LeftMenuPress(_ sender: Any) {
-        HideLeftMenu()
+        ToggleLeftMenu()
     }
     
-    func HideLeftMenu(){
+    func ToggleLeftMenu(){
         isVisibleSideMenu = !isVisibleSideMenu
         SideMenuLeadConstraint.constant = (!isVisibleSideMenu ? 1:0) * -SideMenuWidth.constant
     }
