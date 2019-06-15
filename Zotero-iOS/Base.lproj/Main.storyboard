@@ -196,19 +196,64 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1v-EK-bR6">
+                                <rect key="frame" x="-150" y="88" width="150" height="808"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dcc-vf-diy">
+                                        <rect key="frame" x="0.0" y="169" width="150" height="150"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2V-0c-cHN">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                                <state key="normal" title="Sort"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZ4-o2-HzE">
+                                                <rect key="frame" x="0.0" y="30" width="150" height="30"/>
+                                                <state key="normal" title="Filter"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-hf-iMK">
+                                                <rect key="frame" x="0.0" y="60" width="150" height="30"/>
+                                                <state key="normal" title="Tags"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEj-UG-h1R">
+                                                <rect key="frame" x="0.0" y="90" width="150" height="30"/>
+                                                <state key="normal" title="Sync"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epT-6R-Qln">
+                                                <rect key="frame" x="0.0" y="120" width="150" height="30"/>
+                                                <state key="normal" title="Settings"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="72Q-AC-dq3"/>
+                                    <constraint firstItem="dcc-vf-diy" firstAttribute="top" secondItem="yeS-bs-NM8" secondAttribute="top" constant="169" id="AXL-nc-HKy"/>
+                                    <constraint firstItem="dcc-vf-diy" firstAttribute="centerX" secondItem="O1v-EK-bR6" secondAttribute="centerX" id="KD7-9E-JUh"/>
+                                    <constraint firstItem="yeS-bs-NM8" firstAttribute="trailing" secondItem="dcc-vf-diy" secondAttribute="trailing" id="elj-HX-f9B"/>
+                                    <constraint firstItem="dcc-vf-diy" firstAttribute="leading" secondItem="yeS-bs-NM8" secondAttribute="leading" id="fQH-OD-lfl"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="yeS-bs-NM8"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="AIh-km-kXd" firstAttribute="trailing" secondItem="qA1-ZX-CdA" secondAttribute="trailing" id="9RS-HJ-If6"/>
+                            <constraint firstItem="O1v-EK-bR6" firstAttribute="top" secondItem="qA1-ZX-CdA" secondAttribute="top" id="Ed6-qd-4t5"/>
                             <constraint firstItem="AIh-km-kXd" firstAttribute="leading" secondItem="qA1-ZX-CdA" secondAttribute="leading" id="FAI-Iu-Os7"/>
                             <constraint firstItem="AIh-km-kXd" firstAttribute="top" secondItem="qA1-ZX-CdA" secondAttribute="top" id="Uuh-oq-bDo"/>
+                            <constraint firstAttribute="bottom" secondItem="O1v-EK-bR6" secondAttribute="bottom" id="Y1M-ZN-0tR"/>
                             <constraint firstAttribute="bottom" secondItem="AIh-km-kXd" secondAttribute="bottom" id="dki-bN-rIO"/>
+                            <constraint firstItem="O1v-EK-bR6" firstAttribute="leading" secondItem="qA1-ZX-CdA" secondAttribute="leading" constant="-150" id="vr6-ay-Cmu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qA1-ZX-CdA"/>
                     </view>
                     <navigationItem key="navigationItem" title="Path" id="6AN-L3-95s">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="dXA-B5-D4O">
                             <color key="tintColor" red="1" green="0.13186308059999999" blue="0.14499013450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="LeftMenuPress:" destination="l6e-Th-lrI" id="F38-p7-nGd"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="QCh-tF-U99">
                             <color key="tintColor" red="1" green="0.13186308059999999" blue="0.14499013450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -216,11 +261,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="RefTable" destination="AIh-km-kXd" id="bV8-da-qOS"/>
+                        <outlet property="SideMenuLeadConstraint" destination="vr6-ay-Cmu" id="HUF-bh-1Tl"/>
+                        <outlet property="SideMenuWidth" destination="72Q-AC-dq3" id="QcY-0P-vcq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XpO-hJ-apW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="25"/>
+            <point key="canvasLocation" x="885.50724637681162" y="24.776785714285712"/>
         </scene>
     </scenes>
 </document>

@@ -15,7 +15,14 @@ class ViewWithTableViewController: UIViewController,
     // This Dictionary reprsents the table data source. it is a dictionary mapping UUIDs to an array of
     // [Doc Name, Year, formatted first author]
     var RefItemDict = [Int : [String]]()
+    
+    // TableView to Control
     @IBOutlet weak var RefTable: UITableView!
+    
+    // Side Menu Properties
+    var isVisibleSideMenu : Bool = false
+    @IBOutlet weak var SideMenuLeadConstraint: NSLayoutConstraint!
+    @IBOutlet weak var SideMenuWidth: NSLayoutConstraint!
     
     // Mark: Load
     override func viewDidLoad() {
@@ -70,6 +77,14 @@ class ViewWithTableViewController: UIViewController,
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
+    //Mark: Actions
+    
+    @IBAction func LeftMenuPress(_ sender: Any) {
+        isVisibleSideMenu = !isVisibleSideMenu
+        SideMenuLeadConstraint.constant = (!isVisibleSideMenu ? 1:0) * -SideMenuWidth.constant
+    }
+    
+}
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -115,5 +130,3 @@ class ViewWithTableViewController: UIViewController,
      // Pass the selected object to the new view controller.
      }
      */
-    
-}
