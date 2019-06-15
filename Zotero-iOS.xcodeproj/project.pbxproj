@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9307A9A722B482E2002D4CA6 /* RefItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307A9A622B482E2002D4CA6 /* RefItemTableViewController.swift */; };
 		93B4747D22AF503F00A0C17E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4747C22AF503F00A0C17E /* AppDelegate.swift */; };
 		93B4747F22AF503F00A0C17E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4747E22AF503F00A0C17E /* ViewController.swift */; };
 		93B4748222AF503F00A0C17E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B4748022AF503F00A0C17E /* Main.storyboard */; };
@@ -14,6 +15,7 @@
 		93B4748722AF504000A0C17E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B4748522AF504000A0C17E /* LaunchScreen.storyboard */; };
 		93B4749222AF504000A0C17E /* Zotero_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4749122AF504000A0C17E /* Zotero_iOSTests.swift */; };
 		93B4749D22AF504000A0C17E /* Zotero_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4749C22AF504000A0C17E /* Zotero_iOSUITests.swift */; };
+		93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9307A9A622B482E2002D4CA6 /* RefItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefItemTableViewController.swift; sourceTree = "<group>"; };
 		93B4747922AF503F00A0C17E /* Zotero-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zotero-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B4747C22AF503F00A0C17E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93B4747E22AF503F00A0C17E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		93B4749822AF504000A0C17E /* Zotero-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zotero-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B4749C22AF504000A0C17E /* Zotero_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zotero_iOSUITests.swift; sourceTree = "<group>"; };
 		93B4749E22AF504000A0C17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				93B4748322AF504000A0C17E /* Assets.xcassets */,
 				93B4748522AF504000A0C17E /* LaunchScreen.storyboard */,
 				93B4748822AF504000A0C17E /* Info.plist */,
+				93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */,
+				9307A9A622B482E2002D4CA6 /* RefItemTableViewController.swift */,
 			);
 			path = "Zotero-iOS";
 			sourceTree = "<group>";
@@ -256,8 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9307A9A722B482E2002D4CA6 /* RefItemTableViewController.swift in Sources */,
 				93B4747F22AF503F00A0C17E /* ViewController.swift in Sources */,
 				93B4747D22AF503F00A0C17E /* AppDelegate.swift in Sources */,
+				93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
