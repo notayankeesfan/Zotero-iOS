@@ -47,7 +47,6 @@ class ViewWithTableViewController: UIViewController,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "RefItemTableViewCell"
-        print("test")
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RefItemTableViewCell  else {
             fatalError("The dequeued cell is not an instance of RefItemTableViewCell.")
