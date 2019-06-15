@@ -72,18 +72,26 @@ class ViewWithTableViewController: UIViewController,
     
     // Mark: Nav
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
-        vc!.UUID = indexPath.row
-        self.navigationController?.pushViewController(vc!, animated: true)
+        if (!isVisibleSideMenu) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
+            vc!.UUID = indexPath.row
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+        else{
+            HideLeftMenu()
+        }
     }
     
     //Mark: Actions
     
     @IBAction func LeftMenuPress(_ sender: Any) {
+        HideLeftMenu()
+    }
+    
+    func HideLeftMenu(){
         isVisibleSideMenu = !isVisibleSideMenu
         SideMenuLeadConstraint.constant = (!isVisibleSideMenu ? 1:0) * -SideMenuWidth.constant
     }
-    
 }
     /*
      // Override to support conditional editing of the table view.
