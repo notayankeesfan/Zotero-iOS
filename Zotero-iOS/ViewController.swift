@@ -15,11 +15,14 @@ class RefDetailController: UIViewController {
     @IBOutlet weak var DocumentUUID: UITextField!
     @IBOutlet weak var DocumentYear: UITextField!
     
+    var UUID: Int = -1
+    
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         DocumentName.text = "Test Name"
+        DocumentUUID.text = "\(UUID)"
     }
 
     //MARK: IBAction
