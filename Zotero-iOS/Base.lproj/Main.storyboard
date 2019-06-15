@@ -197,12 +197,47 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="xKa-Nb-k66" kind="relationship" relationship="rootViewController" id="5Wn-A6-akF"/>
+                        <segue destination="l6e-Th-lrI" kind="relationship" relationship="rootViewController" id="Yvc-mz-DCn"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yI-fd-XsX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-49.275362318840585" y="24.776785714285712"/>
+        </scene>
+        <!--Path-->
+        <scene sceneID="cix-oi-T0o">
+            <objects>
+                <viewController id="l6e-Th-lrI" customClass="ViewWithTableViewController" customModule="Zotero_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UPc-wh-45R">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AIh-km-kXd">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AIh-km-kXd" firstAttribute="trailing" secondItem="qA1-ZX-CdA" secondAttribute="trailing" id="9RS-HJ-If6"/>
+                            <constraint firstItem="AIh-km-kXd" firstAttribute="leading" secondItem="qA1-ZX-CdA" secondAttribute="leading" id="FAI-Iu-Os7"/>
+                            <constraint firstItem="AIh-km-kXd" firstAttribute="top" secondItem="qA1-ZX-CdA" secondAttribute="top" id="Uuh-oq-bDo"/>
+                            <constraint firstAttribute="bottom" secondItem="AIh-km-kXd" secondAttribute="bottom" id="dki-bN-rIO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qA1-ZX-CdA"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Path" id="6AN-L3-95s">
+                        <barButtonItem key="leftBarButtonItem" title="Setings" id="dXA-B5-D4O">
+                            <color key="tintColor" red="1" green="0.13186308059999999" blue="0.14499013450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="QCh-tF-U99">
+                            <color key="tintColor" red="1" green="0.13186308059999999" blue="0.14499013450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XpO-hJ-apW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="860.86956521739137" y="738.61607142857144"/>
         </scene>
     </scenes>
 </document>
