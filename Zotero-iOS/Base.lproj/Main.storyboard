@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xKa-Nb-k66">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TbH-Ou-Dkz">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -111,9 +111,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="939" y="25"/>
+            <point key="canvasLocation" x="1847.826086956522" y="24.776785714285712"/>
         </scene>
-        <!--Ref Item Table View Controller-->
+        <!--/Path/-->
         <scene sceneID="Xwa-Z3-nUY">
             <objects>
                 <tableViewController id="xKa-Nb-k66" customClass="RefItemTableViewController" customModule="Zotero_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -173,8 +173,34 @@
                             <outlet property="delegate" destination="xKa-Nb-k66" id="EYU-lI-5Dh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="/Path/" id="nNc-aM-YwG">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="lbs-Mi-CTU">
+                            <color key="tintColor" red="1" green="0.13186308059999999" blue="0.14499013450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="ga3-5T-ERC">
+                            <color key="tintColor" red="1" green="0.13186308059999999" blue="0.14499013450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aF-eV-Yff" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="860.86956521739137" y="24.776785714285712"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tMU-py-IzY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TbH-Ou-Dkz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="QiK-71-ORm">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xKa-Nb-k66" kind="relationship" relationship="rootViewController" id="5Wn-A6-akF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4yI-fd-XsX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-49.275362318840585" y="24.776785714285712"/>
         </scene>
