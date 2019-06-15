@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RefDetailController: UIViewController {
 
     //MARK: Params
     @IBOutlet weak var DocumentName: UITextField!

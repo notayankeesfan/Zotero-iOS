@@ -58,6 +58,11 @@ class RefItemTableViewController: UITableViewController {
         return cell
     }
 
+    // Mark: Nav
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
 
 /*
     // Override to support conditional editing of the table view.
