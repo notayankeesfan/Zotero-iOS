@@ -10,29 +10,17 @@ import UIKit
 
 class RefItemTableViewController: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Load Data
-        loadFakeData()
-    
-    }
-
     // MARK: - Table view data source
     // This Dictionary reprsents the table data source. it is a dictionary mapping UUIDs to an array of
     // [Doc Name, Year, formatted first author]
     var RefItemDict = [Int : [String]]()
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        // Load Data
+        loadFakeData()
     }
-
     
     // Mark: Private Methods
     func loadFakeData(){
@@ -40,23 +28,45 @@ class RefItemTableViewController: UITableViewController {
         RefItemDict[1] = ["doc 1", "2018", "N. Cox"]
         RefItemDict[2] = ["doc 2", "2017", "R. Kadambi"]
     }
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+    
+    // Mark: Public Methods
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
-        // Configure the cell...
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return RefItemDict.count
+    }
+
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "RefItemTableViewCell"
+     
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RefItemTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of RefItemTableViewCell.")
+        }
+        
+        let data = RefItemDict[indexPath.row]
+        
+        cell.ItemName.text = data![0]
+        cell.ItemYear.text = data![1]
+        cell.ItemAuthor.text = data![2]
+        
+
 
         return cell
     }
-    */
 
-    /*
+
+/*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+*/
 
     /*
     // Override to support editing the table view.
