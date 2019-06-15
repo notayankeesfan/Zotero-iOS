@@ -6,6 +6,7 @@
 //  Copyright © 2019 Rohan Kadambi. All rights reserved.
 //
 
+// There is currently no map from index(row) to UUID. need to figure that out once data model is more mature
 import UIKit
 
 class RefItemTableViewController: UITableViewController {
@@ -58,6 +59,12 @@ class RefItemTableViewController: UITableViewController {
         return cell
     }
 
+    // Mark: Nav
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
+        vc!.UUID = indexPath.row
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
 
 /*
     // Override to support conditional editing of the table view.
