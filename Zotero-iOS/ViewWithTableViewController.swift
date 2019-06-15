@@ -1,0 +1,159 @@
+//
+//  ViewWithTableViewController.swift
+//  Zotero-iOS
+//
+//  Created by Rohan Kadambi on 6/15/19.
+//  Copyright © 2019 Rohan Kadambi. All rights reserved.
+//
+
+import UIKit
+
+class ViewWithTableViewController: UIViewController,
+    UITableViewDelegate, UITableViewDataSource{
+
+    // MARK: - Table view data source
+    // This Dictionary reprsents the table data source. it is a dictionary mapping UUIDs to an array of
+    // [Doc Name, Year, formatted first author]
+    var RefItemDict = [Int : [String]]()
+    
+    // TableView to Control
+    @IBOutlet weak var RefTable: UITableView!
+    
+    // Side Menu Properties
+    var isVisibleSideMenu : Bool = false
+    @IBOutlet weak var SideMenuLeadConstraint: NSLayoutConstraint!
+    @IBOutlet weak var SideMenuWidth: NSLayoutConstraint!
+    
+    // Mark: Load
+    override func viewDidLoad() {
+        // Call Super
+        super.viewDidLoad()
+        
+        // Assign Self as Delegate
+        RefTable.delegate = self
+        RefTable.dataSource = self
+        
+        // Init Gesture Recognizer on tableview
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
+        RefTable.addGestureRecognizer(tap)
+        
+        // Load Data
+        loadFakeData()
+    }
+    
+    // Mark: Private Methods
+    func loadFakeData(){
+        RefItemDict[0] = ["doc 0", "2019", "A. Avery"]
+        RefItemDict[1] = ["doc 1", "2018", "N. Cox"]
+        RefItemDict[2] = ["doc 2", "2017", "R. Kadambi"]
+    }
+    
+    // Mark: Public Methods
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return RefItemDict.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "RefItemTableViewCell"
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RefItemTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of RefItemTableViewCell.")
+        }
+        
+        let data = RefItemDict[indexPath.row]
+        
+        cell.ItemName.text = data![0]
+        cell.ItemYear.text = data![1]
+        cell.ItemAuthor.text = data![2]
+        
+        
+        
+        return cell
+    }
+    
+    // Mark: Nav
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (!isVisibleSideMenu) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
+            vc!.UUID = indexPath.row
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+        else{
+            ToggleLeftMenu()
+        }
+    }
+    
+    //Mark: Actions
+    
+    @IBAction func LeftMenuPress(_ sender: Any) {
+        ToggleLeftMenu()
+    }
+    
+    func ToggleLeftMenu(){
+        isVisibleSideMenu = !isVisibleSideMenu
+        SideMenuLeadConstraint.constant = (!isVisibleSideMenu ? 1:0) * -SideMenuWidth.constant
+    }
+    
+    @objc func tableTapped(tap:UITapGestureRecognizer) {
+        let location = tap.location(in: RefTable)
+        let path = RefTable.indexPathForRow(at: location)
+        if let indexPathForRow = path {
+            self.tableView(RefTable, didSelectRowAt: indexPathForRow)
+        } else {
+            if (isVisibleSideMenu) {
+                ToggleLeftMenu()
+            }
+        }
+    }
+}
+    /*
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
+    /*
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
+    /*
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
+    /*
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
