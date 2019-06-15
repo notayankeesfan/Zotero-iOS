@@ -26,9 +26,16 @@ class ViewWithTableViewController: UIViewController,
     
     // Mark: Load
     override func viewDidLoad() {
+        // Call Super
         super.viewDidLoad()
+        
+        // Assign Self as Delegate
         RefTable.delegate = self
         RefTable.dataSource = self
+        
+        // Init Gesture Recognizer on tableview
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
+        RefTable.addGestureRecognizer(tap)
         
         // Load Data
         loadFakeData()
@@ -91,6 +98,18 @@ class ViewWithTableViewController: UIViewController,
     func ToggleLeftMenu(){
         isVisibleSideMenu = !isVisibleSideMenu
         SideMenuLeadConstraint.constant = (!isVisibleSideMenu ? 1:0) * -SideMenuWidth.constant
+    }
+    
+    @objc func tableTapped(tap:UITapGestureRecognizer) {
+        let location = tap.location(in: RefTable)
+        let path = RefTable.indexPathForRow(at: location)
+        if let indexPathForRow = path {
+            self.tableView(RefTable, didSelectRowAt: indexPathForRow)
+        } else {
+            if (isVisibleSideMenu) {
+                ToggleLeftMenu()
+            }
+        }
     }
 }
     /*
