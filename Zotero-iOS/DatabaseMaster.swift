@@ -134,9 +134,6 @@ class DatabaseMaster{
         let yearDict : [Int: String] = populateDict(dataID: fieldDict["date"]!, ID_List:validItemIDs)
         let authorDict : [Int: String] = [:]
 
-        // Get titles
-        
-        
         // Create Array of refSummary Structs with UUID set to ItemIDs and everything else defaulted
         var outputArray : [refSummary] = []
         for item in validItemIDs {
@@ -175,7 +172,7 @@ class DatabaseMaster{
             for row in stmt {
                 output[getIntRow(row: row, ind: 0)] = "\(row[1]!)"
             }
-        } catch{
+        } catch {
             fatalError()
         }
         return output
@@ -187,10 +184,10 @@ class DatabaseMaster{
     }
     
     
-    func prepareRefDetail(itemId: Int) -> Any{
+    func prepareRefDetail(itemId: Int) -> [String: String]{
         
         
-        return [Int: [String]]()
+        return [ : ]
     }
     
     
