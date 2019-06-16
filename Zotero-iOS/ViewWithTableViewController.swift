@@ -49,10 +49,14 @@ class ViewWithTableViewController: UIViewController,
         
         // Connect to test database if current connection is nil
         if let _ = db {
+
+        } else {
             let dbUrl = Bundle.main.url(forResource: "zotero", withExtension: "sqlite")!
             let dbPath = dbUrl.path
             db = DatabaseMaster(dbPath)
         }
+        
+        db!.prepareRefList(library: 1, collection: 14, tagDict: [1 : [1]], filterDict: 1, orderDict: 1)
         
         // Load Data
         loadFakeData()
