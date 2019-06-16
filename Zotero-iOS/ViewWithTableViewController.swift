@@ -15,7 +15,7 @@ class ViewWithTableViewController: UIViewController,
     // MARK: - Table view data source
     // This Dictionary reprsents the table data source. it is a dictionary mapping UUIDs to an array of
     // [Doc Name, Year, formatted first author]
-    var RefItemDict = [Int : [String]]()
+    var RefItemDict : [refSummary] = []
     
     // TableView to Control
     @IBOutlet weak var RefTable: UITableView!
@@ -56,19 +56,20 @@ class ViewWithTableViewController: UIViewController,
             db = DatabaseMaster(dbPath)
         }
         
-        db!.prepareRefList(library: 1, collection: 16, tagDict: [1 : [1]], filterDict: 1, orderDict: 1)
+        RefItemDict = (db!.prepareRefList(library: 1, collection: 16, tagDict: [1 : [1]], filterDict: 1, orderDict: 1))
         
         // Load Data
-        loadFakeData()
+        //loadFakeData()
         
         
     }
     
     // Mark: Private Methods
     func loadFakeData(){
-        RefItemDict[0] = ["doc 0", "2019", "A. Avery"]
-        RefItemDict[1] = ["doc 1", "2018", "N. Cox"]
-        RefItemDict[2] = ["doc 2", "2017", "R. Kadambi"]
+        RefItemDict.append(refSummary(UUID : 0, year : "2019", author : "A. Avery", title: "doc 0"))
+        RefItemDict.append(refSummary(UUID : 1, year : "2018", author : "A. Avery", title: "doc 0"))
+        RefItemDict.append(refSummary(UUID : 2, year : "2017", author : "A. Avery", title: "doc 0"))
+
     }
     
     // Mark: Public Methods
@@ -91,11 +92,9 @@ class ViewWithTableViewController: UIViewController,
         
         let data = RefItemDict[indexPath.row]
         
-        cell.ItemName.text = data![0]
-        cell.ItemYear.text = data![1]
-        cell.ItemAuthor.text = data![2]
-        
-        
+        cell.ItemName.text = data.title
+        cell.ItemYear.text = data.year
+        cell.ItemAuthor.text = data.author
         
         return cell
     }
@@ -104,7 +103,7 @@ class ViewWithTableViewController: UIViewController,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (!isVisibleSideMenu) {
             let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
-            vc!.UUID = indexPath.row
+            vc!.UUID = RefItemDict[indexPath.row].UUID
             self.navigationController?.pushViewController(vc!, animated: true)
         }
         else{
