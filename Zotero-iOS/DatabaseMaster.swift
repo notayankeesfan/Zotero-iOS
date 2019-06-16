@@ -17,8 +17,20 @@ class DatabaseMaster{
     //Mark: Init
     init(_ dbPath: String){
         conn = try! Connection(dbPath, readonly: true)
-
     }
     
+    //Mark: Methods
+    func prepareRefList(library : Int, collection: Int, tagDict: [Int:[Int]], filterDict: Any, orderDict: Any) -> [Int: [String]]{
+    
+    
+        return [Int: [String]]()
+    }
+    
+    
+    func prepareRefDetail(itemId: Int) -> Any{
+        
+        
+        return [Int: [String]]()
+    }
     //
 }
