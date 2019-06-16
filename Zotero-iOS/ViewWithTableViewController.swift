@@ -56,7 +56,7 @@ class ViewWithTableViewController: UIViewController,
             db = DatabaseMaster(dbPath)
         }
         
-        db!.prepareRefList(library: 1, collection: 14, tagDict: [1 : [1]], filterDict: 1, orderDict: 1)
+        db!.prepareRefList(library: 1, collection: 16, tagDict: [1 : [1]], filterDict: 1, orderDict: 1)
         
         // Load Data
         loadFakeData()
