@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite
 
 class ViewWithTableViewController: UIViewController,
     UITableViewDelegate, UITableViewDataSource{
@@ -24,6 +25,15 @@ class ViewWithTableViewController: UIViewController,
     @IBOutlet weak var SideMenuLeadConstraint: NSLayoutConstraint!
     @IBOutlet weak var SideMenuWidth: NSLayoutConstraint!
     
+    // DataBaseObject and related propereties
+    var db : DatabaseMaster? = nil
+    // The structure of these dicts is still up in the air, need to figure out how to manage this info
+    var filterDict = [Int: [String]] ()
+    var orderDict = [Int: [String]] ()
+    var tagDict = [Int: [String]] ()
+    var library = ""
+    var collection = ""
+    
     // Mark: Load
     override func viewDidLoad() {
         // Call Super
@@ -37,13 +47,17 @@ class ViewWithTableViewController: UIViewController,
         let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
         RefTable.addGestureRecognizer(tap)
         
+        // Connect to test database if current connection is nil
+        if let _ = db {
+            let dbUrl = Bundle.main.url(forResource: "zotero", withExtension: "sqlite")!
+            let dbPath = dbUrl.path
+            db = DatabaseMaster(dbPath)
+        }
+        
         // Load Data
         loadFakeData()
         
-        // Connect to the database please
-        let dbUrl = Bundle.main.url(forResource: "zotero", withExtension: "sqlite")!
-        let dbPath = dbUrl.path
-        print(dbPath)
+        
     }
     
     // Mark: Private Methods
