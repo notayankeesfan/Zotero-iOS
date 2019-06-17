@@ -12,9 +12,6 @@ class RefDetailController: UIViewController,
         UITableViewDelegate, UITableViewDataSource{
 
     //MARK: Params
-    @IBOutlet weak var DocumentName: UITextField!
-    @IBOutlet weak var DocumentUUID: UITextField!
-    @IBOutlet weak var DocumentYear: UITextField!
     @IBOutlet weak var ContentsTable: UITableView!
     
     var UUID : Int = -1
@@ -22,7 +19,7 @@ class RefDetailController: UIViewController,
     var fake_data = [ DetailPropertyCellContents(FieldName: "Name", Value: "Document Title is Something"),
                       DetailPropertyCellContents(FieldName: "Test 1", Value: "test 1 text"),
                       DetailPropertyCellContents(FieldName: "Year", Value: "2019"),
-                      DetailPropertyCellContents(FieldName: "Abstractt", Value: "Document Title is SomethingDocument Title is                                                           SomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is Something")
+                      DetailPropertyCellContents(FieldName: "Abstractt", Value: "Document Title is SomethingDocument Title is                                                           SomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingEND")
                     ]
     
     //MARK: Methods
@@ -35,9 +32,6 @@ class RefDetailController: UIViewController,
         ContentsTable.estimatedRowHeight = 60
         ContentsTable.rowHeight = UITableView.automaticDimension
         
-        // Do any additional setup after loading the view.
-        DocumentName.text = "\(documentTitle)"
-        DocumentUUID.text = "\(UUID)"
     }
 
     //MARK: IBAction
@@ -45,7 +39,6 @@ class RefDetailController: UIViewController,
         // Debug
         print("Button Test")
         // Toggle if field is editable
-        DocumentName.allowsEditingTextAttributes = !DocumentName.allowsEditingTextAttributes
     }
     
     
