@@ -14,13 +14,10 @@ class RefDetailController: UIViewController,
     //MARK: Params
     @IBOutlet weak var ContentsTable: UITableView!
     
+    var db : DatabaseMaster? = nil
     var UUID : Int = -1
-    var documentTitle : String = ""
-    var fake_data = [ DetailPropertyCellContents(FieldName: "Name", Value: "Document Title is Something"),
-                      DetailPropertyCellContents(FieldName: "Test 1", Value: "test 1 text"),
-                      DetailPropertyCellContents(FieldName: "Year", Value: "2019"),
-                      DetailPropertyCellContents(FieldName: "Abstractt", Value: "Document Title is SomethingDocument Title is                                                           SomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingSomethingDocument Title is SomethingDocument                                                           Title is SomethingDocument Title is SomethingEND")
-                    ]
+    var tagList : [String] = []
+    var fieldList : [DetailPropertyCellContents] = []
     
     //MARK: Methods
     override func viewDidLoad() {
@@ -29,8 +26,17 @@ class RefDetailController: UIViewController,
         ContentsTable.delegate = self
         ContentsTable.dataSource = self
         
+        
+        // Load data
+        fieldList = db!.prepareRefDetail(UUID: UUID)
+        // Load Tag
+        tagList = db!.tagsForItem(itemID: UUID)
+        
+        
+        // Resize Cells
         ContentsTable.estimatedRowHeight = 60
         ContentsTable.rowHeight = UITableView.automaticDimension
+        
         
     }
 
@@ -50,7 +56,7 @@ class RefDetailController: UIViewController,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // TBD
-        return fake_data.count
+        return fieldList.count
     }
     
     
@@ -60,13 +66,13 @@ class RefDetailController: UIViewController,
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? DetailPropertyTableViewCell  else {
             fatalError("The dequeued cell is not an instance of DetailPropertyTableViewCell.")
         }
-        cell.set(contents: fake_data[indexPath.row])
+        cell.set(contents: fieldList[indexPath.row])
         return cell
     }
     
     // Mark: Nav
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let content = fake_data[indexPath.row]
+        let content = fieldList[indexPath.row]
         content.Expanded = !content.Expanded
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
