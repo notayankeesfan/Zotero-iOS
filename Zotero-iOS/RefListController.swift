@@ -9,7 +9,7 @@
 import UIKit
 import SQLite
 
-class ViewWithTableViewController: UIViewController,
+class RefListController: UIViewController,
     UITableViewDelegate, UITableViewDataSource{
 
     // MARK: - Table view data source

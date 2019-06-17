@@ -111,7 +111,7 @@
         <!--Path-->
         <scene sceneID="cix-oi-T0o">
             <objects>
-                <viewController id="l6e-Th-lrI" customClass="ViewWithTableViewController" customModule="Zotero_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="l6e-Th-lrI" customClass="RefListController" customModule="Zotero_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UPc-wh-45R">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
