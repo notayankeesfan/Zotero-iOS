@@ -92,6 +92,7 @@ class DatabaseMaster{
     let valueID = "valueID"
     let value = "value"
     let tagID = "tagID"
+    let fieldName = "fieldName"
 
     //FieldID Dict
     let fieldDict = ["title" : 110,
@@ -223,12 +224,42 @@ class DatabaseMaster{
 
     
     
-    func prepareRefDetail(itemId: Int) -> [String: String]{
+    func prepareRefDetail(UUID: Int) -> [DetailPropertyCellContents]{
+        var propertyList : [DetailPropertyCellContents] = []
+        // Select the Join of fields required with fields with data
+        let query = """
+                    SELECT
+                    \(fieldsCombined).\(fieldName),
+                    \(itemDataValues).\(value)
+                    FROM \(fieldsCombined)
+                    INNER JOIN \(itemData)
+                    ON \(itemData).\(fieldID) = \(fieldsCombined).\(fieldID)
+                    INNER JOIN \(itemDataValues)
+                    ON \(itemData).\(valueID) = \(itemDataValues).\(valueID)
+                    WHERE \(itemData).\(itemID) = \(UUID)
+                    """
+        do{
+            let stmt = try conn.prepare(query)
+            // TEMPORARY, Missing some sort of order
+            for row in stmt {
+                propertyList.append(DetailPropertyCellContents(FieldName: "\(row[0]!)", Value: "\(row[1]!)"))
+            }
+        } catch {
+            fatalError()
+        }
         
+        // Iterate over and add to property list
         
-        return [ : ]
+        //Add Logic for Author
+        // Something with an Insert at and then getting the first/only index and then joining with \n
+        return propertyList
     }
     
+    
+    func tagsForItem(itemID : Int) -> [String]{
+        
+        return []
+    }
     
     //Mark: Utilitiy
     func getIntRow(row : Statement.Element, ind : Int) -> Int{
@@ -257,8 +288,9 @@ class DatabaseMaster{
     }
     
     func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [String]]{
-        
-        return[:]
+        // TBD
+        var output : [Int : [String]] = [:]
+        return output
     }
     
     func getItemsWithTag(tagList : [Int]) -> [Int]{

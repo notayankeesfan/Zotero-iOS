@@ -8,22 +8,36 @@
 
 import UIKit
 
-class RefDetailController: UIViewController {
+class RefDetailController: UIViewController,
+        UITableViewDelegate, UITableViewDataSource{
 
     //MARK: Params
-    @IBOutlet weak var DocumentName: UITextField!
-    @IBOutlet weak var DocumentUUID: UITextField!
-    @IBOutlet weak var DocumentYear: UITextField!
+    @IBOutlet weak var ContentsTable: UITableView!
     
+    var db : DatabaseMaster? = nil
     var UUID : Int = -1
-    var documentTitle : String = ""
+    var tagList : [String] = []
+    var fieldList : [DetailPropertyCellContents] = []
     
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        DocumentName.text = "\(documentTitle)"
-        DocumentUUID.text = "\(UUID)"
+        // Connect to Table
+        ContentsTable.delegate = self
+        ContentsTable.dataSource = self
+        
+        
+        // Load data
+        fieldList = db!.prepareRefDetail(UUID: UUID)
+        // Load Tag
+        tagList = db!.tagsForItem(itemID: UUID)
+        
+        
+        // Resize Cells
+        ContentsTable.estimatedRowHeight = 60
+        ContentsTable.rowHeight = UITableView.automaticDimension
+        
+        
     }
 
     //MARK: IBAction
@@ -31,7 +45,36 @@ class RefDetailController: UIViewController {
         // Debug
         print("Button Test")
         // Toggle if field is editable
-        DocumentName.allowsEditingTextAttributes = !DocumentName.allowsEditingTextAttributes
+    }
+    
+    
+    // Mark: Public Methods
+    func numberOfSections(in tableView: UITableView) -> Int {
+        //TBD
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // TBD
+        return fieldList.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "DetailPropertyTableViewCell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? DetailPropertyTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of DetailPropertyTableViewCell.")
+        }
+        cell.set(contents: fieldList[indexPath.row])
+        return cell
+    }
+    
+    // Mark: Nav
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let content = fieldList[indexPath.row]
+        content.Expanded = !content.Expanded
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 

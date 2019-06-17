@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9307A9A722B482E2002D4CA6 /* RefItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307A9A622B482E2002D4CA6 /* RefItemTableViewController.swift */; };
+		93006CF422B70E8B003F8620 /* DetailPropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */; };
 		9315977222B5B87C0010E055 /* zotero.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9315977122B5B87C0010E055 /* zotero.sqlite */; };
 		935CA21022B5BB760020D6A1 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935CA20222B5BB4D0020D6A1 /* SQLite.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		935CA21222B5BFF30020D6A1 /* DatabaseMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */; };
@@ -89,7 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9307A9A622B482E2002D4CA6 /* RefItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefItemTableViewController.swift; sourceTree = "<group>"; };
+		93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPropertyTableViewCell.swift; sourceTree = "<group>"; };
 		9315977122B5B87C0010E055 /* zotero.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = zotero.sqlite; sourceTree = "<group>"; };
 		935CA1F722B5BB4D0020D6A1 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../../../../../Downloads/SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseMaster.swift; sourceTree = "<group>"; };
@@ -184,6 +184,7 @@
 			children = (
 				93B4747C22AF503F00A0C17E /* AppDelegate.swift */,
 				93B4747E22AF503F00A0C17E /* ViewController.swift */,
+				93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */,
 				93B4748022AF503F00A0C17E /* Main.storyboard */,
 				937A54CA22B539D600243C14 /* ViewWithTableViewController.swift */,
 				935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */,
@@ -191,7 +192,6 @@
 				93B4748522AF504000A0C17E /* LaunchScreen.storyboard */,
 				93B4748822AF504000A0C17E /* Info.plist */,
 				93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */,
-				9307A9A622B482E2002D4CA6 /* RefItemTableViewController.swift */,
 				935CA1F722B5BB4D0020D6A1 /* SQLite.xcodeproj */,
 			);
 			path = "Zotero-iOS";
@@ -405,12 +405,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9307A9A722B482E2002D4CA6 /* RefItemTableViewController.swift in Sources */,
 				93B4747F22AF503F00A0C17E /* ViewController.swift in Sources */,
 				935CA21222B5BFF30020D6A1 /* DatabaseMaster.swift in Sources */,
 				937A54CB22B539D600243C14 /* ViewWithTableViewController.swift in Sources */,
 				93B4747D22AF503F00A0C17E /* AppDelegate.swift in Sources */,
 				93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */,
+				93006CF422B70E8B003F8620 /* DetailPropertyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

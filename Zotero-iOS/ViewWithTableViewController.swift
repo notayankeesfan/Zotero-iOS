@@ -104,7 +104,7 @@ class ViewWithTableViewController: UIViewController,
         if (!isVisibleSideMenu) {
             let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
             vc!.UUID = RefItemDict[indexPath.row].UUID
-            vc!.documentTitle = RefItemDict[indexPath.row].title
+            vc!.db = db
             self.navigationController?.pushViewController(vc!, animated: true)
         }
         else{
