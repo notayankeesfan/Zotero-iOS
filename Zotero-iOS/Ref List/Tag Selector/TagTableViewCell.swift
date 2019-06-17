@@ -22,3 +22,15 @@ class TagTableViewCell: UITableViewCell {
     }
 
 }
+
+class tagContents{
+    var name : String
+    var id : Int
+    var state : Int
+    init(name : String, id : Int){
+        self.name = name
+        self.id = id
+        self.state = 0
+    }
+    
+}
