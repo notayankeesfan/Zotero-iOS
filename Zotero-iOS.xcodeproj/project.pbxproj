@@ -191,8 +191,8 @@
 		93A11CFE22B745FB001AD19E /* Tag Selector */ = {
 			isa = PBXGroup;
 			children = (
-				93A11CFF22B7462B001AD19E /* TagTableViewCell.swift */,
 				93A11D0122B74647001AD19E /* TagSelectorViewController.swift */,
+				93A11CFF22B7462B001AD19E /* TagTableViewCell.swift */,
 			);
 			path = "Tag Selector";
 			sourceTree = "<group>";

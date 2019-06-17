@@ -134,6 +134,15 @@ class RefListController: UIViewController,
             }
         }
     }
+    
+    @IBAction func TapTag(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "tagSelectorViewController") as? TagSelectorViewController
+        vc!.db = db
+        vc!.tagCollection = self.tagCollection
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    
+    
 }
     /*
      // Override to support conditional editing of the table view.

@@ -190,6 +190,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-hf-iMK">
                                                 <rect key="frame" x="0.0" y="60" width="150" height="30"/>
                                                 <state key="normal" title="Tags"/>
+                                                <connections>
+                                                    <action selector="TapTag:" destination="l6e-Th-lrI" eventType="touchUpInside" id="Tvg-qe-95g"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEj-UG-h1R">
                                                 <rect key="frame" x="0.0" y="90" width="150" height="30"/>
@@ -249,7 +252,7 @@
         <!--Tag Selector-->
         <scene sceneID="VQw-8p-QKU">
             <objects>
-                <viewController id="SJr-yk-JAy" userLabel="Tag Selector" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tagSelectorViewController" id="SJr-yk-JAy" userLabel="Tag Selector" customClass="TagSelectorViewController" customModule="Zotero_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P97-5W-fUK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -258,7 +261,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4lq-k9-r8x">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TagTableViewCell" id="4lq-k9-r8x" customClass="TagTableViewCell" customModule="Zotero_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4lq-k9-r8x" id="Bbk-ey-gY1">
@@ -279,6 +282,9 @@
                                                 <constraint firstItem="gqQ-Sp-jBv" firstAttribute="leading" secondItem="Bbk-ey-gY1" secondAttribute="leading" constant="20" id="asS-LL-hrv"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="TagLabel" destination="gqQ-Sp-jBv" id="C8M-2K-fyn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -292,6 +298,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQw-U3-q2M"/>
                     </view>
+                    <connections>
+                        <outlet property="TagTable" destination="cbR-He-Y5t" id="Ocu-aI-AL0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lzG-rk-s0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
