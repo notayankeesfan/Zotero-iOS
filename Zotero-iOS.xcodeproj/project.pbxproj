@@ -157,6 +157,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		93A11CFB22B744AA001AD19E /* RefDetail */ = {
+			isa = PBXGroup;
+			children = (
+				93B4747E22AF503F00A0C17E /* RefDetailController.swift */,
+				93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */,
+			);
+			path = RefDetail;
+			sourceTree = "<group>";
+		};
+		93A11CFC22B744B9001AD19E /* Ref List */ = {
+			isa = PBXGroup;
+			children = (
+				937A54CA22B539D600243C14 /* RefListController.swift */,
+				93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */,
+			);
+			path = "Ref List";
+			sourceTree = "<group>";
+		};
 		93B4747022AF503F00A0C17E = {
 			isa = PBXGroup;
 			children = (
@@ -183,15 +201,13 @@
 			isa = PBXGroup;
 			children = (
 				93B4747C22AF503F00A0C17E /* AppDelegate.swift */,
-				93B4747E22AF503F00A0C17E /* RefDetailController.swift */,
-				93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */,
-				93B4748022AF503F00A0C17E /* Main.storyboard */,
-				937A54CA22B539D600243C14 /* RefListController.swift */,
 				935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */,
+				93A11CFC22B744B9001AD19E /* Ref List */,
+				93A11CFB22B744AA001AD19E /* RefDetail */,
+				93B4748022AF503F00A0C17E /* Main.storyboard */,
 				93B4748322AF504000A0C17E /* Assets.xcassets */,
 				93B4748522AF504000A0C17E /* LaunchScreen.storyboard */,
 				93B4748822AF504000A0C17E /* Info.plist */,
-				93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */,
 				935CA1F722B5BB4D0020D6A1 /* SQLite.xcodeproj */,
 			);
 			path = "Zotero-iOS";
