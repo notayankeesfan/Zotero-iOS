@@ -30,7 +30,7 @@ class RefListController: UIViewController,
     // The structure of these dicts is still up in the air, need to figure out how to manage this info
     var filterDict = [Int: [String]] ()
     var orderDict = [Int: [String]] ()
-    var tagDict = [Int: [String]] ()
+    var tagCollection : tagFilter = tagFilter(include: [], exclude: [])
     var library = ""
     var collection = ""
     

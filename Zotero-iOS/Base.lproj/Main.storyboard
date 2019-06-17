@@ -264,6 +264,20 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4lq-k9-r8x" id="Bbk-ey-gY1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqQ-Sp-jBv">
+                                                    <rect key="frame" x="20" y="0.0" width="394" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="gqQ-Sp-jBv" secondAttribute="trailing" id="AY4-Oq-95g"/>
+                                                <constraint firstItem="gqQ-Sp-jBv" firstAttribute="top" secondItem="Bbk-ey-gY1" secondAttribute="top" id="QGE-Wg-phF"/>
+                                                <constraint firstAttribute="bottom" secondItem="gqQ-Sp-jBv" secondAttribute="bottom" id="R6O-ZF-BeH"/>
+                                                <constraint firstItem="gqQ-Sp-jBv" firstAttribute="leading" secondItem="Bbk-ey-gY1" secondAttribute="leading" constant="20" id="asS-LL-hrv"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
