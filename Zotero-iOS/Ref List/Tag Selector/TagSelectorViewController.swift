@@ -23,9 +23,33 @@ class TagSelectorViewController: UIViewController,
         TagTable.delegate = self
         TagTable.dataSource = self
         
+        // if db is empty try and reinit
+        if let _ = db {
+            
+        } else {
+            let dbUrl = Bundle.main.url(forResource: "zotero", withExtension: "sqlite")!
+            let dbPath = dbUrl.path
+            db = DatabaseMaster(dbPath)
+        }
+        
         // getList of alltags
         alltags = db!.getAllTags()
         
+        // correct any tag status
+        for tag_inc in tagCollection.include{
+            for tg in alltags{
+                if(tg.id == tag_inc){
+                    tg.state = 1
+                }
+            }
+        }
+        for tag_exc in tagCollection.exclude{
+            for tg in alltags{
+                if(tg.id == tag_exc){
+                    tg.state = 2
+                }
+            }
+        }
         // Resize Cells
         TagTable.estimatedRowHeight = 60
         TagTable.rowHeight = UITableView.automaticDimension
@@ -69,4 +93,5 @@ class TagSelectorViewController: UIViewController,
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    
 }

@@ -267,7 +267,9 @@ class DatabaseMaster{
         var tag_array : [tagContents] = []
         // Set up query
         let query = """
-                    SELECT \(tagID), \(name) FROM \(self.tags)
+                    SELECT Distinct \(itemTags).\(tagID), \(tags).\(name) FROM \(itemTags)
+                    JOIN \(tags)
+                    ON \(itemTags).\(tagID) = \(tags).\(tagID)
                     """
         do{
             let stmt = try conn.prepare(query)

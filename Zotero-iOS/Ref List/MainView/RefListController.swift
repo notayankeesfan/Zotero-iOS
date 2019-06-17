@@ -31,8 +31,8 @@ class RefListController: UIViewController,
     var filterDict = [Int: [String]] ()
     var orderDict = [Int: [String]] ()
     var tagCollection : tagFilter = tagFilter(include: [], exclude: [])
-    var library = ""
-    var collection = ""
+    var library = 1
+    var collection = 14
     
     // Mark: Load
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class RefListController: UIViewController,
             db = DatabaseMaster(dbPath)
         }
         
-        RefItemDict = (db!.prepareRefList(library: 1, collection: 16, tagList: tagFilter(include: [],exclude: [2]), filterDict: 1, authorDict: 1, orderDict: 1))
+        RefItemDict = (db!.prepareRefList(library: library, collection: collection, tagList: tagCollection, filterDict: 1, authorDict: 1, orderDict: 1))
         
         // Load Data
         //loadFakeData()
@@ -142,6 +142,11 @@ class RefListController: UIViewController,
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        RefItemDict = (db!.prepareRefList(library: library, collection: collection, tagList: tagCollection, filterDict: 1, authorDict: 1, orderDict: 1))
+        RefTable.reloadData()
+    }
     
 }
     /*
