@@ -105,8 +105,7 @@ class DatabaseMaster{
     }
     
     //Mark: Methods
-    func prepareRefList(library : Int, collection: Int, tagList: tagFilter, filterDict: Any, authorDict: Any, orderDict: Any) -> [refSummary]{
-        // May add boolean for include subdirs, curerntly coding to always include
+    func prepareRefList(library : Int, collection: Int, includeSub: Bool, tagList: tagFilter, filterDict: Any, authorDict: Any, orderDict: Any) -> [refSummary]{
         var validItemIDs : [Int] = []
         
         // Determine any additional nested collections
