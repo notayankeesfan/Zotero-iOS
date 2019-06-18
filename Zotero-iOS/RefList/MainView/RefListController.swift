@@ -61,6 +61,9 @@ class RefListController: UIViewController,
         // Load Data
         //loadFakeData()
         
+        RefTable.tableFooterView = UIView()
+
+        
         
     }
     

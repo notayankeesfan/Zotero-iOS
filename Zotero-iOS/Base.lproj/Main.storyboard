@@ -103,7 +103,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="l0E-06-bQE" customClass="DetailTagTableViewCell" customModule="Zotero_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="DetailTagTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailTagTableViewCell" id="l0E-06-bQE" customClass="DetailTagTableViewCell" customModule="Zotero_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l0E-06-bQE" id="v53-CQ-EHk">
@@ -111,17 +111,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddr-U5-Y1E">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="50" y="20" width="57" height="3.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ddr-U5-Y1E" firstAttribute="leading" secondItem="v53-CQ-EHk" secondAttribute="leading" id="92Q-oA-LOf"/>
-                                                <constraint firstAttribute="trailing" secondItem="ddr-U5-Y1E" secondAttribute="trailing" id="E3b-LO-nBr"/>
-                                                <constraint firstAttribute="bottom" secondItem="ddr-U5-Y1E" secondAttribute="bottom" id="Zma-Zi-6dJ"/>
-                                                <constraint firstItem="ddr-U5-Y1E" firstAttribute="top" secondItem="v53-CQ-EHk" secondAttribute="top" id="aBk-Qf-nTX"/>
+                                                <constraint firstItem="ddr-U5-Y1E" firstAttribute="leading" secondItem="v53-CQ-EHk" secondAttribute="leading" constant="50" id="92Q-oA-LOf"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ddr-U5-Y1E" secondAttribute="trailing" symbolic="YES" id="E3b-LO-nBr"/>
+                                                <constraint firstAttribute="bottom" secondItem="ddr-U5-Y1E" secondAttribute="bottom" constant="20" id="Zma-Zi-6dJ"/>
+                                                <constraint firstItem="ddr-U5-Y1E" firstAttribute="top" secondItem="v53-CQ-EHk" secondAttribute="top" constant="20" id="aBk-Qf-nTX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

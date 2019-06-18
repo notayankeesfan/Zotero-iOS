@@ -35,7 +35,8 @@ class RefDetailController: UIViewController,
         ContentsTable.estimatedRowHeight = 60
         ContentsTable.rowHeight = UITableView.automaticDimension
         
-        
+        ContentsTable.tableFooterView = UIView()
+
     }
 
     //MARK: IBAction

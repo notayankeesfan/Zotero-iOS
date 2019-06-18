@@ -25,9 +25,11 @@ UITableViewDelegate, UITableViewDataSource {
         DetailTagTable.dataSource = self
         
         // Prepare tagList
-        tagList = db!.tagsForItem(itemID: UUID)
+        tagList = db!.tagsForItem(UUID: UUID)
         
         // Do any additional setup after loading the view.
+        DetailTagTable.tableFooterView = UIView()
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

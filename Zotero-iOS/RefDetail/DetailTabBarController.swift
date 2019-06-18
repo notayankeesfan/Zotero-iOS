@@ -21,6 +21,10 @@ class DetailTabBarController: UITabBarController {
                 viewController.db = db
                 viewController.UUID = UUID
             }
+            if let viewController = viewController as? DetailTagController{
+                viewController.db = db
+                viewController.UUID = UUID
+            }
 
         }
     }

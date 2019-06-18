@@ -170,6 +170,7 @@
 		93A11CFB22B744AA001AD19E /* RefDetail */ = {
 			isa = PBXGroup;
 			children = (
+				93FB979D22B870DE00F12DA8 /* DetailTabBarController.swift */,
 				93FB979B22B86CFA00F12DA8 /* Tags */,
 				93FB979322B86CEB00F12DA8 /* Metadata Detail */,
 			);
@@ -233,7 +234,6 @@
 				93A11CFC22B744B9001AD19E /* RefList */,
 				93A11CFB22B744AA001AD19E /* RefDetail */,
 				93B4748022AF503F00A0C17E /* Main.storyboard */,
-				93FB979D22B870DE00F12DA8 /* DetailTabBarController.swift */,
 				93B4748322AF504000A0C17E /* Assets.xcassets */,
 				93B4748522AF504000A0C17E /* LaunchScreen.storyboard */,
 				93B4748822AF504000A0C17E /* Info.plist */,
