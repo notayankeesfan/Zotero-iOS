@@ -9,7 +9,7 @@
 import UIKit
 import SQLite
 
-class ViewWithTableViewController: UIViewController,
+class RefListController: UIViewController,
     UITableViewDelegate, UITableViewDataSource{
 
     // MARK: - Table view data source
@@ -30,9 +30,9 @@ class ViewWithTableViewController: UIViewController,
     // The structure of these dicts is still up in the air, need to figure out how to manage this info
     var filterDict = [Int: [String]] ()
     var orderDict = [Int: [String]] ()
-    var tagDict = [Int: [String]] ()
-    var library = ""
-    var collection = ""
+    var tagCollection : tagFilter = tagFilter(include: [], exclude: [])
+    var library = 1
+    var collection = 14
     
     // Mark: Load
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class ViewWithTableViewController: UIViewController,
             db = DatabaseMaster(dbPath)
         }
         
-        RefItemDict = (db!.prepareRefList(library: 1, collection: 16, tagList: tagFilter(include: [],exclude: [2]), filterDict: 1, authorDict: 1, orderDict: 1))
+        RefItemDict = (db!.prepareRefList(library: library, collection: collection, tagList: tagCollection, filterDict: 1, authorDict: 1, orderDict: 1))
         
         // Load Data
         //loadFakeData()
@@ -134,6 +134,20 @@ class ViewWithTableViewController: UIViewController,
             }
         }
     }
+    
+    @IBAction func TapTag(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "tagSelectorViewController") as? TagSelectorViewController
+        vc!.db = db
+        vc!.tagCollection = self.tagCollection
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        RefItemDict = (db!.prepareRefList(library: library, collection: collection, tagList: tagCollection, filterDict: 1, authorDict: 1, orderDict: 1))
+        RefTable.reloadData()
+    }
+    
 }
     /*
      // Override to support conditional editing of the table view.

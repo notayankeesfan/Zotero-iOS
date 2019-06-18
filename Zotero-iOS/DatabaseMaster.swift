@@ -47,13 +47,13 @@ class tagFilter {
     }
     
     func removeInclude(tagID: Int){
-        if(!include.contains(tagID)){
+        if(include.contains(tagID)){
             include.remove(at: include.firstIndex(of: tagID)!)
         }
     }
     
     func removeExclude(tagID: Int){
-        if(!exclude.contains(tagID)){
+        if(exclude.contains(tagID)){
             exclude.remove(at: exclude.firstIndex(of: tagID)!)
         }
     }
@@ -74,6 +74,7 @@ class DatabaseMaster{
     let items = "Items"
     let itemTags = "ItemTags"
     let itemData = "ItemData"
+    let tags = "tags"
     
     // Reference Tables
     let fieldsCombined = "fieldsCombined"
@@ -93,6 +94,7 @@ class DatabaseMaster{
     let value = "value"
     let tagID = "tagID"
     let fieldName = "fieldName"
+    let name = "name"
 
     //FieldID Dict
     let fieldDict = ["title" : 110,
@@ -261,6 +263,25 @@ class DatabaseMaster{
         return []
     }
     
+    func getAllTags() -> [tagContents]{
+        var tag_array : [tagContents] = []
+        // Set up query
+        let query = """
+                    SELECT Distinct \(itemTags).\(tagID), \(tags).\(name) FROM \(itemTags)
+                    JOIN \(tags)
+                    ON \(itemTags).\(tagID) = \(tags).\(tagID)
+                    """
+        do{
+            let stmt = try conn.prepare(query)
+            for row in stmt {
+                tag_array.append(tagContents(name: "\(row[1]!)", id: getIntRow(row: row, ind: 0)))
+            }
+        } catch {
+            fatalError()
+        }
+        return tag_array
+    }
+    
     //Mark: Utilitiy
     func getIntRow(row : Statement.Element, ind : Int) -> Int{
         return Int(row[ind]! as! Int64)
@@ -289,7 +310,7 @@ class DatabaseMaster{
     
     func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [String]]{
         // TBD
-        var output : [Int : [String]] = [:]
+        let output : [Int : [String]] = [:]
         return output
     }
     
