@@ -66,16 +66,18 @@ class DatabaseMaster{
     
     // Collection Tables
     let collections = "collections"
-    let collectionItems = "collectionItems"
     let libraries = "libraries"
     let groups = "groups"
-    
+    let creators = "creators"
+    let tags = "tags"
+
+
     // Item Tables
     let items = "Items"
     let itemTags = "ItemTags"
     let itemData = "ItemData"
-    let tags = "tags"
-    
+    let collectionItems = "collectionItems"
+    let itemCreators = "itemCreators"
     // Reference Tables
     let fieldsCombined = "fieldsCombined"
     let itemDataValues = "ItemDataValues"
@@ -95,6 +97,10 @@ class DatabaseMaster{
     let tagID = "tagID"
     let fieldName = "fieldName"
     let name = "name"
+    let firstName = "firstName"
+    let lastName = "lastName"
+    let creatorID = "creatorID"
+    let orderIndex = "orderIndex"
 
     //FieldID Dict
     let fieldDict = ["title" : 110,
@@ -323,7 +329,33 @@ class DatabaseMaster{
     
     func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [String]]{
         // TBD
-        let output : [Int : [String]] = [:]
+        var output : [Int : [String]] = [:]
+        // Iterate over UUID
+        // Select Join on authors where ID = ID
+        for id in ID_List{
+            let query = """
+                        SELECT \(creators).\(firstName), \(creators).\(lastName) FROM \(itemCreators)
+                        Join \(creators)
+                        ON \(itemCreators).\(creatorID) = \(creators).\(creatorID)
+                        WHERE \(itemCreators).\(itemID) = \(id)
+                        \(onlyFirst ? "AND \(itemCreators).\(orderIndex) = 0" : "")
+                        """
+            do{
+                let stmt = try conn.prepare(query)
+                var temp : [String] = []
+                for row in stmt {
+                    //output.append()
+                    temp.append("\(row[0]!) \(row[1]!)")
+                }
+                output[id] = temp
+                // add itemids
+            } catch {
+                fatalError()
+            }
+        }
+        
+        
+        
         return output
     }
     
