@@ -82,13 +82,30 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="wCC-v9-yoK"/>
                     <connections>
                         <outlet property="ContentsTable" destination="2hh-zi-ghF" id="4R4-8d-v8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1847.826086956522" y="24.776785714285712"/>
+            <point key="canvasLocation" x="2757.971014492754" y="24.776785714285712"/>
+        </scene>
+        <!--Ref Detail Tags Controller-->
+        <scene sceneID="gIZ-8r-8Fh">
+            <objects>
+                <viewController id="g9i-aD-GHb" userLabel="Ref Detail Tags Controller" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WCp-69-W4Q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.13186308059999999" blue="0.14499013450000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <viewLayoutGuide key="safeArea" id="eaB-Bc-Ngf"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="JI7-Na-egj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W2f-aA-DFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2758" y="748"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tMU-py-IzY">
@@ -305,6 +322,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lzG-rk-s0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="885.50724637681162" y="782.14285714285711"/>
+        </scene>
+        <!-- DetailTabBarController-->
+        <scene sceneID="eVe-zY-qBb">
+            <objects>
+                <tabBarController storyboardIdentifier="testID" title=" DetailTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="YaG-JA-Z83" customClass="DetailTabBarController" customModule="Zotero_iOS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5ic-YO-soB">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="3e9-TL-Oqv"/>
+                        <segue destination="g9i-aD-GHb" kind="relationship" relationship="viewControllers" id="a5y-AX-auk"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VAM-ms-g0T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1847.826086956522" y="24.776785714285712"/>
         </scene>
     </scenes>
 </document>
