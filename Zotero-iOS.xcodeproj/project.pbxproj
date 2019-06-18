@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		93006CF422B70E8B003F8620 /* DetailPropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */; };
 		9315977222B5B87C0010E055 /* zotero.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9315977122B5B87C0010E055 /* zotero.sqlite */; };
+		9338B7AB22B8823D00F20D3D /* DetailTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338B7AA22B8823D00F20D3D /* DetailTagController.swift */; };
+		9338B7B422B8826E00F20D3D /* DetailTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338B7B322B8826E00F20D3D /* DetailTagTableViewCell.swift */; };
 		935CA21022B5BB760020D6A1 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935CA20222B5BB4D0020D6A1 /* SQLite.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		935CA21222B5BFF30020D6A1 /* DatabaseMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */; };
 		937A54CB22B539D600243C14 /* RefListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937A54CA22B539D600243C14 /* RefListController.swift */; };
@@ -94,6 +96,8 @@
 /* Begin PBXFileReference section */
 		93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPropertyTableViewCell.swift; sourceTree = "<group>"; };
 		9315977122B5B87C0010E055 /* zotero.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = zotero.sqlite; sourceTree = "<group>"; };
+		9338B7AA22B8823D00F20D3D /* DetailTagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTagController.swift; sourceTree = "<group>"; };
+		9338B7B322B8826E00F20D3D /* DetailTagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTagTableViewCell.swift; sourceTree = "<group>"; };
 		935CA1F722B5BB4D0020D6A1 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../../../../../Downloads/SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseMaster.swift; sourceTree = "<group>"; };
 		937A54CA22B539D600243C14 /* RefListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefListController.swift; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 		93FB979B22B86CFA00F12DA8 /* Tags */ = {
 			isa = PBXGroup;
 			children = (
+				9338B7AA22B8823D00F20D3D /* DetailTagController.swift */,
+				9338B7B322B8826E00F20D3D /* DetailTagTableViewCell.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -465,10 +471,12 @@
 				93B4747F22AF503F00A0C17E /* RefDetailController.swift in Sources */,
 				935CA21222B5BFF30020D6A1 /* DatabaseMaster.swift in Sources */,
 				937A54CB22B539D600243C14 /* RefListController.swift in Sources */,
+				9338B7B422B8826E00F20D3D /* DetailTagTableViewCell.swift in Sources */,
 				93A11D0022B7462B001AD19E /* TagTableViewCell.swift in Sources */,
 				93B4747D22AF503F00A0C17E /* AppDelegate.swift in Sources */,
 				93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */,
 				93A11D0222B74647001AD19E /* TagSelectorViewController.swift in Sources */,
+				9338B7AB22B8823D00F20D3D /* DetailTagController.swift in Sources */,
 				93FB979E22B870DE00F12DA8 /* DetailTabBarController.swift in Sources */,
 				93006CF422B70E8B003F8620 /* DetailPropertyTableViewCell.swift in Sources */,
 			);
