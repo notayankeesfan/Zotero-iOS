@@ -150,7 +150,7 @@ class RefListController: UIViewController,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        RefItemDict = (db!.prepareRefList(library: library, collection: collection, includeSub: true, tagList: tagCollection, filterDict: 1, authorDict: 1, orderDict: 1))
+        RefItemDict = (db!.prepareRefList(library: library, collection: collection, includeSub: true,  tagList: tagCollection, filterDict: 1, authorDict: 1, orderDict: 1))
         RefTable.reloadData()
     }
     
