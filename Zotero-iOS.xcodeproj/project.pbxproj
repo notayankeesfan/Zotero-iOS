@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		93006CF422B70E8B003F8620 /* DetailPropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */; };
 		9315977222B5B87C0010E055 /* zotero.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9315977122B5B87C0010E055 /* zotero.sqlite */; };
+		9338B7AB22B8823D00F20D3D /* DetailTagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338B7AA22B8823D00F20D3D /* DetailTagController.swift */; };
+		9338B7B422B8826E00F20D3D /* DetailTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338B7B322B8826E00F20D3D /* DetailTagTableViewCell.swift */; };
 		935CA21022B5BB760020D6A1 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935CA20222B5BB4D0020D6A1 /* SQLite.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		935CA21222B5BFF30020D6A1 /* DatabaseMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */; };
 		937A54CB22B539D600243C14 /* RefListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937A54CA22B539D600243C14 /* RefListController.swift */; };
@@ -22,6 +24,7 @@
 		93B4749222AF504000A0C17E /* Zotero_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4749122AF504000A0C17E /* Zotero_iOSTests.swift */; };
 		93B4749D22AF504000A0C17E /* Zotero_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4749C22AF504000A0C17E /* Zotero_iOSUITests.swift */; };
 		93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */; };
+		93FB979E22B870DE00F12DA8 /* DetailTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FB979D22B870DE00F12DA8 /* DetailTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,8 @@
 /* Begin PBXFileReference section */
 		93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPropertyTableViewCell.swift; sourceTree = "<group>"; };
 		9315977122B5B87C0010E055 /* zotero.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = zotero.sqlite; sourceTree = "<group>"; };
+		9338B7AA22B8823D00F20D3D /* DetailTagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTagController.swift; sourceTree = "<group>"; };
+		9338B7B322B8826E00F20D3D /* DetailTagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTagTableViewCell.swift; sourceTree = "<group>"; };
 		935CA1F722B5BB4D0020D6A1 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../../../../../Downloads/SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseMaster.swift; sourceTree = "<group>"; };
 		937A54CA22B539D600243C14 /* RefListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefListController.swift; sourceTree = "<group>"; };
@@ -112,6 +117,7 @@
 		93B4749C22AF504000A0C17E /* Zotero_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zotero_iOSUITests.swift; sourceTree = "<group>"; };
 		93B4749E22AF504000A0C17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93BC0C4822B36BA0002BC5A8 /* RefItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefItemTableViewCell.swift; sourceTree = "<group>"; };
+		93FB979D22B870DE00F12DA8 /* DetailTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,19 +170,20 @@
 		93A11CFB22B744AA001AD19E /* RefDetail */ = {
 			isa = PBXGroup;
 			children = (
-				93B4747E22AF503F00A0C17E /* RefDetailController.swift */,
-				93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */,
+				93FB979D22B870DE00F12DA8 /* DetailTabBarController.swift */,
+				93FB979B22B86CFA00F12DA8 /* Tags */,
+				93FB979322B86CEB00F12DA8 /* Metadata Detail */,
 			);
 			path = RefDetail;
 			sourceTree = "<group>";
 		};
-		93A11CFC22B744B9001AD19E /* Ref List */ = {
+		93A11CFC22B744B9001AD19E /* RefList */ = {
 			isa = PBXGroup;
 			children = (
 				93A11CFE22B745FB001AD19E /* Tag Selector */,
 				93A11CFD22B745F2001AD19E /* MainView */,
 			);
-			path = "Ref List";
+			path = RefList;
 			sourceTree = "<group>";
 		};
 		93A11CFD22B745F2001AD19E /* MainView */ = {
@@ -224,7 +231,7 @@
 			children = (
 				93B4747C22AF503F00A0C17E /* AppDelegate.swift */,
 				935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */,
-				93A11CFC22B744B9001AD19E /* Ref List */,
+				93A11CFC22B744B9001AD19E /* RefList */,
 				93A11CFB22B744AA001AD19E /* RefDetail */,
 				93B4748022AF503F00A0C17E /* Main.storyboard */,
 				93B4748322AF504000A0C17E /* Assets.xcassets */,
@@ -251,6 +258,24 @@
 				93B4749E22AF504000A0C17E /* Info.plist */,
 			);
 			path = "Zotero-iOSUITests";
+			sourceTree = "<group>";
+		};
+		93FB979322B86CEB00F12DA8 /* Metadata Detail */ = {
+			isa = PBXGroup;
+			children = (
+				93B4747E22AF503F00A0C17E /* RefDetailController.swift */,
+				93006CF322B70E8B003F8620 /* DetailPropertyTableViewCell.swift */,
+			);
+			path = "Metadata Detail";
+			sourceTree = "<group>";
+		};
+		93FB979B22B86CFA00F12DA8 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				9338B7AA22B8823D00F20D3D /* DetailTagController.swift */,
+				9338B7B322B8826E00F20D3D /* DetailTagTableViewCell.swift */,
+			);
+			path = Tags;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,10 +471,13 @@
 				93B4747F22AF503F00A0C17E /* RefDetailController.swift in Sources */,
 				935CA21222B5BFF30020D6A1 /* DatabaseMaster.swift in Sources */,
 				937A54CB22B539D600243C14 /* RefListController.swift in Sources */,
+				9338B7B422B8826E00F20D3D /* DetailTagTableViewCell.swift in Sources */,
 				93A11D0022B7462B001AD19E /* TagTableViewCell.swift in Sources */,
 				93B4747D22AF503F00A0C17E /* AppDelegate.swift in Sources */,
 				93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */,
 				93A11D0222B74647001AD19E /* TagSelectorViewController.swift in Sources */,
+				9338B7AB22B8823D00F20D3D /* DetailTagController.swift in Sources */,
+				93FB979E22B870DE00F12DA8 /* DetailTabBarController.swift in Sources */,
 				93006CF422B70E8B003F8620 /* DetailPropertyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -61,6 +61,9 @@ class RefListController: UIViewController,
         // Load Data
         //loadFakeData()
         
+        RefTable.tableFooterView = UIView()
+
+        
         
     }
     
@@ -102,10 +105,13 @@ class RefListController: UIViewController,
     // Mark: Nav
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (!isVisibleSideMenu) {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
-            vc!.UUID = RefItemDict[indexPath.row].UUID
-            vc!.db = db
-            self.navigationController?.pushViewController(vc!, animated: true)
+//            let vc = storyboard?.instantiateViewController(withIdentifier: "RefDetailController") as? RefDetailController
+//            vc!.UUID = RefItemDict[indexPath.row].UUID
+//            vc!.db = db
+            let tb = storyboard?.instantiateViewController(withIdentifier: "DetailTab") as? DetailTabBarController
+            tb!.db = db
+            tb!.UUID = RefItemDict[indexPath.row].UUID
+            self.navigationController?.pushViewController(tb!, animated: true)
         }
         else{
             ToggleLeftMenu()

@@ -258,9 +258,23 @@ class DatabaseMaster{
     }
     
     
-    func tagsForItem(itemID : Int) -> [String]{
-        
-        return []
+    func tagsForItem(UUID : Int) -> [String]{
+        var tagArray : [String] = []
+        let query = """
+                    SELECT \(tags).\(name) FROM \(itemTags)
+                    JOIN \(tags)
+                    On \(itemTags).\(tagID) = \(tags).\(tagID)
+                    WHERE \(itemTags).\(itemID) = \(UUID)
+                    """
+        do{
+            let stmt = try conn.prepare(query)
+            for row in stmt {
+                tagArray.append("\(row[0]!)")
+            }
+        } catch {
+            fatalError()
+        }
+        return tagArray
     }
     
     func getAllTags() -> [tagContents]{

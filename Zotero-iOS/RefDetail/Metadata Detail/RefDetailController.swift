@@ -16,7 +16,6 @@ class RefDetailController: UIViewController,
     
     var db : DatabaseMaster? = nil
     var UUID : Int = -1
-    var tagList : [String] = []
     var fieldList : [DetailPropertyCellContents] = []
     
     //MARK: Methods
@@ -30,14 +29,14 @@ class RefDetailController: UIViewController,
         // Load data
         fieldList = db!.prepareRefDetail(UUID: UUID)
         // Load Tag
-        tagList = db!.tagsForItem(itemID: UUID)
         
         
         // Resize Cells
         ContentsTable.estimatedRowHeight = 60
         ContentsTable.rowHeight = UITableView.automaticDimension
         
-        
+        ContentsTable.tableFooterView = UIView()
+
     }
 
     //MARK: IBAction
