@@ -23,6 +23,30 @@ struct refSummary{
     }
 }
 
+struct author_struct{
+    var firstName : String = ""
+    var lastName : String = ""
+    var id : Int = -1
+    
+    init(firstName: String, lastName: String, id: Int){
+        self.firstName = firstName
+        self.lastName = lastName
+        self.id = id
+    }
+    
+    func formatName(style: Int) -> String {
+        var name = ""
+        switch style{
+        case 0:
+            name = "\(firstName) \(lastName)"
+        default:
+            name = "\(lastName), \(firstName)"
+        }
+        return name
+    }
+    
+}
+
 class tagFilter {
     var include : [Int]
     var exclude : [Int]
@@ -184,7 +208,6 @@ class DatabaseMaster{
         }
             
         // Query items meeting Filter Dict
-        
         // THis might need to be a loop
         
         // Find intersection of the different sets
@@ -203,7 +226,7 @@ class DatabaseMaster{
         // Create Dicts mapping UUID --> year, author, title
         let titleDict : [Int: String] = populateDict(dataID: fieldDict["title"]!, ID_List: validItemIDs)
         let yearDict : [Int: String] = populateDict(dataID: fieldDict["date"]!, ID_List:validItemIDs)
-        let authorDict : [Int: String] = [:]
+        let authorDict : [Int: [author_struct]] = getAuthor(ID_List : validItemIDs, onlyFirst : true)
 
         // Create Array of refSummary Structs with UUID set to ItemIDs and everything else defaulted
         var outputArray : [refSummary] = []
@@ -217,7 +240,9 @@ class DatabaseMaster{
             }
             
             if let opt = authorDict[item] {
-                author = "\(opt)"
+                if opt.count > 0 {
+                    author = "\(opt[0].formatName(style: 0))"
+                }
             }
             
             if let opt = yearDict[item] {
@@ -327,14 +352,18 @@ class DatabaseMaster{
         return output
     }
     
-    func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [String]]{
+    func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [author_struct]]{
         // TBD
-        var output : [Int : [String]] = [:]
+        var output : [Int : [author_struct]] = [:]
+        for id in ID_List{
+            output[id] = nil
+        }
         // Iterate over UUID
         // Select Join on authors where ID = ID
         for id in ID_List{
             let query = """
-                        SELECT \(creators).\(firstName), \(creators).\(lastName) FROM \(itemCreators)
+                        SELECT \(creators).\(firstName), \(creators).\(lastName), \(creators).\(creatorID)
+                        FROM \(itemCreators)
                         Join \(creators)
                         ON \(itemCreators).\(creatorID) = \(creators).\(creatorID)
                         WHERE \(itemCreators).\(itemID) = \(id)
@@ -342,10 +371,12 @@ class DatabaseMaster{
                         """
             do{
                 let stmt = try conn.prepare(query)
-                var temp : [String] = []
-                for row in stmt {
+                var temp : [author_struct] = []
+                for (ind, row) in stmt.enumerated() {
+                    if (onlyFirst ? ind == 0 : true) {
+                        temp.append(author_struct(firstName: "\(row[0]!)", lastName: "\(row[1]!)", id: getIntRow(row: row, ind: 2)))
+                    }
                     //output.append()
-                    temp.append("\(row[0]!) \(row[1]!)")
                 }
                 output[id] = temp
                 // add itemids
@@ -353,9 +384,6 @@ class DatabaseMaster{
                 fatalError()
             }
         }
-        
-        
-        
         return output
     }
     
