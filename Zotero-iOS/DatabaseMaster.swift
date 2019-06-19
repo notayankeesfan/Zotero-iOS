@@ -138,6 +138,7 @@ class DatabaseMaster{
     func prepareRefList(library : Int, collection: Int, includeSub: Bool, tagList: tagFilter, filterDict: Any, authorDict: Any, orderDict: Any) -> [refSummary]{
         var validItemIDs : [Int] = []
         
+        // Neeed to narrow by library then by collection
         // Determine any additional nested collections
         // Determine which Collections are in this library
         var collectionArray = ["\(collection)"]
@@ -283,6 +284,17 @@ class DatabaseMaster{
         // Iterate over and add to property list
         
         //Add Logic for Author
+        let authorDict : [Int: [author_struct]] = getAuthor(ID_List : [UUID], onlyFirst : false)
+        if let opt = authorDict[UUID] {
+            if opt.count > 0 {
+                var authorString = ""
+                for author in opt{
+                    authorString = "\(authorString)\n\(author.formatName(style: 0))"
+                }
+                propertyList.append(DetailPropertyCellContents(FieldName: "Author", Value: authorString))
+            }
+        }
+
         // Something with an Insert at and then getting the first/only index and then joining with \n
         return propertyList
     }
@@ -385,6 +397,10 @@ class DatabaseMaster{
             }
         }
         return output
+    }
+    
+    func getCollections(library : Int, collection: Int, includeSub: Bool) -> [Int]{
+        return []
     }
     
     func getItemsWithTag(tagList : [Int]) -> [Int]{
