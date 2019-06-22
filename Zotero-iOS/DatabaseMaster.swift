@@ -86,35 +86,36 @@ class tagFilter {
 
 class DatabaseMaster{
     //Mark: Properties
+    //SQLite Connection
     var conn : Connection
     
-    // Collection Tables
-    let collections = "collections"
-    let libraries = "libraries"
-    let groups = "groups"
-    let creators = "creators"
-    let tags = "tags"
+    // MARK: Data Tables
+    let items = "items" // List of all items, what item type they are, what library they are in, sync status
+    let libraries = "libraries" //List of all libraries, when they were last sync'd
+    let groups = "groups" // Name of Group Libraries
+    let collections = "collections" // List of all collections, sync status
+    let creators = "creators" // List of all creators (authors)
+    let tags = "tags" // List of all Tags
+    let itemDataValues = "ItemDataValues" // List of different datavalues
+    let itemTypes = "itemTypes" // List of different item types (define what fields should be used)
+    let fields = "fields" // List of different fields
 
 
-    // Item Tables
-    let items = "Items"
-    let itemTags = "ItemTags"
-    let itemData = "ItemData"
-    let collectionItems = "collectionItems"
-    let itemCreators = "itemCreators"
-    // Reference Tables
-    let fieldsCombined = "fieldsCombined"
-    let itemDataValues = "ItemDataValues"
-    let itemTypeFieldsCombined = "itemTypeFieldsCombined"
-    let itemTypesCombined = "itemTypesCombined"
+    // MARK: Relationship Tables
+    let itemTags = "itemTags" // Tags associated with Items
+    let itemData = "itemData" // Data associated with Items
+    let collectionItems = "collectionItems" // Items in Collections (not 1:1 with items b/c of unfiled)
+    let itemCreators = "itemCreators" // Creators associated with Items
+    let itemTypeFields = "itemTypeFields" // What Fields are used for each itemType, what order should they display
+
     
-    // Column Names
+    // MARK: Column Names
     let collectionID = "collectionID"
+    let parentcollectionID = "parentcollectionID"
     let collectionName = "collectionName"
     let libraryID = "libraryID"
     let libraryName = "libraryName"
     let itemID = "itemID"
-    let parentcollectionID = "parentcollectionID"
     let fieldID = "fieldID"
     let valueID = "valueID"
     let value = "value"
@@ -126,16 +127,28 @@ class DatabaseMaster{
     let creatorID = "creatorID"
     let orderIndex = "orderIndex"
 
-    //FieldID Dict
-    let fieldDict = ["title" : 110,
-                     "date" : 14,]
-    //Mark: Init
+    //FieldID Dict: Quick Reference for fieldname to field id
+    let fieldDict_id_lookup = ["title" : 110,
+                               "date" : 14,]
+    // MARK: Methods
+    
+    // MARK: Init
     init(_ dbPath: String){
         conn = try! Connection(dbPath, readonly: true)
     }
     
-    //Mark: Methods
+    //Mark: Query Data to Display
+    /**
+     This Method returns an array of <refSummary> Stucts which is used by the "RefList" View Controller to populate its table view with a list of all items meeting user chosen criteria. Includes functionality to return a list of items based on library, collection, tags, author (TBD), and general fitlers (TBD).
+     
+     - Parameter library: Library ID specifying where to pull items from
+     - Parameter collection: Collection ID specifying where to pull items from
+     - Parameter includeSub: Boolean specying where to include sub collections or not
+     - Parameter tagList: tagFilter Struct that specifies which tags to include or exclude
+     
+     */
     func prepareRefList(library : Int, collection: Int, includeSub: Bool, tagList: tagFilter, filterDict: Any, authorDict: Any, orderDict: Any) -> [refSummary]{
+
         var validItemIDs : [Int] = []
         
         // Neeed to narrow by library then by collection
@@ -225,8 +238,8 @@ class DatabaseMaster{
         // Order Valid ItemIDs
         
         // Create Dicts mapping UUID --> year, author, title
-        let titleDict : [Int: String] = populateDict(dataID: fieldDict["title"]!, ID_List: validItemIDs)
-        let yearDict : [Int: String] = populateDict(dataID: fieldDict["date"]!, ID_List:validItemIDs)
+        let titleDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["title"]!, ID_List: validItemIDs)
+        let yearDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["date"]!, ID_List:validItemIDs)
         let authorDict : [Int: [author_struct]] = getAuthor(ID_List : validItemIDs, onlyFirst : true)
 
         // Create Array of refSummary Structs with UUID set to ItemIDs and everything else defaulted
@@ -262,11 +275,11 @@ class DatabaseMaster{
         // Select the Join of fields required with fields with data
         let query = """
                     SELECT
-                    \(fieldsCombined).\(fieldName),
+                    \(fields).\(fieldName),
                     \(itemDataValues).\(value)
-                    FROM \(fieldsCombined)
+                    FROM \(fields)
                     INNER JOIN \(itemData)
-                    ON \(itemData).\(fieldID) = \(fieldsCombined).\(fieldID)
+                    ON \(itemData).\(fieldID) = \(fields).\(fieldID)
                     INNER JOIN \(itemDataValues)
                     ON \(itemData).\(valueID) = \(itemDataValues).\(valueID)
                     WHERE \(itemData).\(itemID) = \(UUID)
