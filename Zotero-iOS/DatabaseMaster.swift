@@ -302,9 +302,19 @@ class DatabaseMaster{
     
 
     
-    
+    /**
+     This Method returns an array of DetailPropopertyCellContents Structs which are used to display the detailed metadata of a given item
+     
+     - Parameter UUID: the itemID of the item of interest
+     
+     - Returns: [DetailPropertyCellContents](x-source-tag://) Array
+     
+     - Tag: DatabaseMaster_DatabaseMaster_prepareRefDetail
+     */
     func prepareRefDetail(UUID: Int) -> [DetailPropertyCellContents]{
         var propertyList : [DetailPropertyCellContents] = []
+        //TODO: Update Query to join on itemType and itemTypeFields to get a dispaly order
+        
         // Select the Join of fields required with fields with data
         let query = """
                     SELECT
@@ -319,7 +329,7 @@ class DatabaseMaster{
                     """
         do{
             let stmt = try conn.prepare(query)
-            // TEMPORARY, Missing some sort of order
+            // Iterate over and add to property list
             for row in stmt {
                 propertyList.append(DetailPropertyCellContents(FieldName: "\(row[0]!)", Value: "\(row[1]!)"))
             }
@@ -327,9 +337,7 @@ class DatabaseMaster{
             fatalError()
         }
         
-        // Iterate over and add to property list
-        
-        //Add Logic for Author
+        // Separately get data for authors because they're in a different table
         let authorDict : [Int: [authorStruct]] = getAuthor(ID_List : [UUID], onlyFirst : false)
         if let opt = authorDict[UUID] {
             if opt.count > 0 {
@@ -337,11 +345,11 @@ class DatabaseMaster{
                 for author in opt{
                     authorString = "\(authorString)\n\(author.formatName(style: 0))"
                 }
+                //TODO: Update where in the display this should be
                 propertyList.append(DetailPropertyCellContents(FieldName: "Author", Value: authorString))
             }
         }
 
-        // Something with an Insert at and then getting the first/only index and then joining with \n
         return propertyList
     }
     
