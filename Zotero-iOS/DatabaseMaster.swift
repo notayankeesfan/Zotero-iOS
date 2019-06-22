@@ -9,6 +9,9 @@
 import Foundation
 import SQLite
 
+/**
+ - Tag: DatabaseMaster_refSummary
+ */
 struct refSummary{
     var UUID = -1
     var year = ""
@@ -23,7 +26,10 @@ struct refSummary{
     }
 }
 
-struct author_struct{
+/**
+ - Tag: DatabaseMaster_authorStruct
+ */
+struct authorStruct{
     var firstName : String = ""
     var lastName : String = ""
     var id : Int = -1
@@ -47,6 +53,9 @@ struct author_struct{
     
 }
 
+/**
+ - Tag: DatabaseMaster_tagFilter
+ */
 class tagFilter {
     var include : [Int]
     var exclude : [Int]
@@ -82,8 +91,9 @@ class tagFilter {
         }
     }
 }
-
-
+/**
+ - Tag: DatabaseMaster_DatabaseMaster
+ */
 class DatabaseMaster{
     //Mark: Properties
     //SQLite Connection
@@ -144,13 +154,24 @@ class DatabaseMaster{
      - Parameter library: Library ID specifying where to pull items from
      - Parameter collection: Collection ID specifying where to pull items from
      - Parameter includeSub: Boolean specying where to include sub collections or not
-     - Parameter tagList: tagFilter Struct that specifies which tags to include or exclude
+     - Parameter tagList: [tagFilter](x-source-tag://DatabaseMaster_tagFilter) Struct that specifies which tags to include or exclude
+     - Parameter filterDict: TBD
+     - Parameter authorDict: TBD
+     - Parameter orderDict: TBD
      
+     - Returns: [refSummary](x-source-tag://DatabaseMaster_refSummary) Array
+     
+     - Tag: DatabaseMaster_DatabaseMaster_prepareRefList
      */
     func prepareRefList(library : Int, collection: Int, includeSub: Bool, tagList: tagFilter, filterDict: Any, authorDict: Any, orderDict: Any) -> [refSummary]{
-
+        // TODO: Implement General Filters
+        // TODO: Implement Author Filters
+        // TODO: Implement Output Order Control
+        
+        // Empty Array that will hold final list of valid Item IDs that will be included in output
         var validItemIDs : [Int] = []
         
+        // TODO: Move this logic to its own function
         // Neeed to narrow by library then by collection
         // Determine any additional nested collections
         // Determine which Collections are in this library
@@ -186,6 +207,7 @@ class DatabaseMaster{
             fatalError()
         }
         
+        // Convert the final list of valid collections into a String separated by commas for use in SQL WHERE Clause
         let collectionList = collectionArray.joined(separator: ", ")
         
         // Create List of all items who exist in a valid collection
@@ -204,16 +226,21 @@ class DatabaseMaster{
             fatalError()
         }
         
-        // Query items with tags (itemTags Table)
+        // Create List of items include or excluded by filters
+        // Any tags applied?
         let anyTagFilter = (tagList.include.count != 0) || (tagList.exclude.count != 0)
+        // Initialize arrays to hold output
         var include_tag_item : [Int] = []
         var exclude_tag_item : [Int] = []
+        // If Any Tags applied
         if(anyTagFilter){
+            // If any to include, get list of those itemIDs which have a tag to include
             if tagList.include.count != 0 {
                 // fill include_tag
                 include_tag_item = getItemsWithTag(tagList: tagList.include)
             }
             
+            // If any to exclude, get list of those itemIDs which have a tag to exclude
             if tagList.exclude.count != 0 {
                 // fill exclude_tag
                 exclude_tag_item = getItemsWithTag(tagList: tagList.exclude)
@@ -224,41 +251,47 @@ class DatabaseMaster{
         // Query items meeting Filter Dict
         // THis might need to be a loop
         
-        // Find intersection of the different sets
-        //TEMPORARY REPLACE THIS with INTERSECTION LOGIC
-        validItemIDs = valid_item_collection
+        // Find intersection of the different lists of item Lists
+        validItemIDs = valid_item_collection // Initialize the list of validIDs with the items that were in a valid collection
+        // If there were any tag Include Filters intersect with that list
         if (tagList.include.count != 0) {
             validItemIDs = intersectItemLists(main: validItemIDs, secondary: include_tag_item, includeSecondary: true)
         }
+        // If there were any tag Exclude Filters subtract that list
         if (tagList.exclude.count != 0) {
             validItemIDs = intersectItemLists(main: validItemIDs, secondary: exclude_tag_item, includeSecondary: false)
         }
+        //TODO: Add Intersection for other Filter Types
         
+        //TODO: Order Valid ItemIDs
         
-        // Order Valid ItemIDs
-        
-        // Create Dicts mapping UUID --> year, author, title
+        // Create Dicts mapping UUID --> title, year, author
+        // These checks are done separately because 1) the author info is in a different table 2) allows some items to be missing some data.
         let titleDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["title"]!, ID_List: validItemIDs)
         let yearDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["date"]!, ID_List:validItemIDs)
-        let authorDict : [Int: [author_struct]] = getAuthor(ID_List : validItemIDs, onlyFirst : true)
+        let authorDict : [Int: [authorStruct]] = getAuthor(ID_List : validItemIDs, onlyFirst : true)
 
-        // Create Array of refSummary Structs with UUID set to ItemIDs and everything else defaulted
+        // Create Array of refSummary Structs with UUID set to ItemIDs
         var outputArray : [refSummary] = []
         for item in validItemIDs {
+            // Default Fields to Empty String
             var year = ""
             var author = ""
             var title = ""
             
+            // If the title was found use it
             if let opt = titleDict[item] {
                 title = "\(opt)"
             }
             
+            // If an author was found use it
             if let opt = authorDict[item] {
                 if opt.count > 0 {
                     author = "\(opt[0].formatName(style: 0))"
                 }
             }
             
+            // If a year was found use it
             if let opt = yearDict[item] {
                 year = String("\(opt)".suffix(4))
             }
@@ -297,7 +330,7 @@ class DatabaseMaster{
         // Iterate over and add to property list
         
         //Add Logic for Author
-        let authorDict : [Int: [author_struct]] = getAuthor(ID_List : [UUID], onlyFirst : false)
+        let authorDict : [Int: [authorStruct]] = getAuthor(ID_List : [UUID], onlyFirst : false)
         if let opt = authorDict[UUID] {
             if opt.count > 0 {
                 var authorString = ""
@@ -313,6 +346,7 @@ class DatabaseMaster{
     }
     
     
+    //MARK: Helper Functions
     func tagsForItem(UUID : Int) -> [String]{
         var tagArray : [String] = []
         let query = """
@@ -377,9 +411,9 @@ class DatabaseMaster{
         return output
     }
     
-    func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [author_struct]]{
+    func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [authorStruct]]{
         // TBD
-        var output : [Int : [author_struct]] = [:]
+        var output : [Int : [authorStruct]] = [:]
         for id in ID_List{
             output[id] = nil
         }
@@ -396,10 +430,10 @@ class DatabaseMaster{
                         """
             do{
                 let stmt = try conn.prepare(query)
-                var temp : [author_struct] = []
+                var temp : [authorStruct] = []
                 for (ind, row) in stmt.enumerated() {
                     if (onlyFirst ? ind == 0 : true) {
-                        temp.append(author_struct(firstName: "\(row[0]!)", lastName: "\(row[1]!)", id: getIntRow(row: row, ind: 2)))
+                        temp.append(authorStruct(firstName: "\(row[0]!)", lastName: "\(row[1]!)", id: getIntRow(row: row, ind: 2)))
                     }
                     //output.append()
                 }
