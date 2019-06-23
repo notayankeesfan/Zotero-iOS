@@ -502,30 +502,32 @@ class DatabaseMaster{
     }
     
     /**
-     This Method returns a list of collection in a given library and optionally a given collection. Includes option to include subdirectories of the specified library/collection
+     This Method returns a list of items in a given library and optionally a given collection. Includes option to include subdirectories of the specified library/collection
      
      - Parameter library: libraryID of the library of interest
      - Parameter collection: Optional collectionID of a collection in library
      - Parameter includeSub: Boolean specifying if sub-collections should be included
      
-     - Returns: Array of Ints representing the valid collectionIDs
+     - Returns: Array of Ints representing the valid itemIDs
      
-     - Tag: DatabaseMaster_getCollections
+     - Tag: DatabaseMaster_getItemsInCollections
      */
-    func getCollections(library : Int, collection : Int?, includeSub: Bool) -> [Int]{
+    func getItemsInCollections(library : Int, collection : Int?, includeSub: Bool) -> [Int]{
         //TODO: Write the function
+        var itemList : [Int] = []
         var allCollectionList : [Int] = []
         var collectionList : [Int] = []
         var allParentCollectionList : [Int?] = []
-        let query = """
-                    SELECT \(collectionID), \(parentcollectionID) FROM \(collections)
-                    Where \(libraryID) = \(library)
-                    """
+        var directFlag = true // 3 of the different scenarios of libary-collection pairs can be handled the same way once the collections are defined. this makes it easier to determine them in a single conditional
+        let collec_query = """
+                           SELECT \(collectionID), \(parentcollectionID) FROM \(collections)
+                           Where \(libraryID) = \(library)
+                           """
         do{
-            let stmt = try conn.prepare(query)
-            for row in stmt {
-                allCollectionList.append(getIntRow(row: row, ind: 0))
-                allParentCollectionList.append(Int(row[1]! as! Int64))
+            let collec_stmt = try conn.prepare(collec_query)
+            for collec_row in collec_stmt {
+                allCollectionList.append(getIntRow(row: collec_row, ind: 0))
+                allParentCollectionList.append(Int(collec_row[1]! as! Int64))
             }
         } catch {
             fatalError()
@@ -535,6 +537,7 @@ class DatabaseMaster{
             // If a collection was specified
             if (includeSub){
                 // If a collection was specified and includeSub was chosen
+                directFlag = true
                 collectionList.append(collec)
                 var anyAddition = true
                 while (anyAddition){
@@ -550,25 +553,46 @@ class DatabaseMaster{
                 
             } else {
                 // If a collection was specified and includeSub was not chosen
+                directFlag = true
                 collectionList.append(collec)
             }
         } else{
             // If a collection was not specified
             if (includeSub){
                 // If a collection was not specified and includeSub was chosen
+                directFlag = true
                 collectionList = allCollectionList
 
             } else {
                 // If a collection was not specified and includeSub was not chosen
+                directFlag = false
                 collectionList = []
             }
         
         }
         
+        if(directFlag){
+            let collectionListStr = collectionList.map { String($0) }
+            let item_query = """
+                             SELECT \(itemID) FROM \(collectionItems)
+                             WHERE \(libraryID) = \(library)
+                             AND \(collectionID) IN (\(collectionListStr.joined(separator: ", ")))
+                             """
+            do{
+                let item_stmt = try conn.prepare(item_query)
+                for item_row in item_stmt {
+                    itemList.append(getIntRow(row: item_row, ind: 0))
+                }
+            } catch {
+                fatalError()
+            }
+        } else {
+            
+        }
         
         
         
-        return collectionList
+        return itemList
     }
     
     /**
