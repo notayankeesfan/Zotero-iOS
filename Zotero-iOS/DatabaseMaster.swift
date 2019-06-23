@@ -514,7 +514,61 @@ class DatabaseMaster{
      */
     func getCollections(library : Int, collection : Int?, includeSub: Bool) -> [Int]{
         //TODO: Write the function
-        return []
+        var allCollectionList : [Int] = []
+        var collectionList : [Int] = []
+        var allParentCollectionList : [Int?] = []
+        let query = """
+                    SELECT \(collectionID), \(parentcollectionID) FROM \(collections)
+                    Where \(libraryID) = \(library)
+                    """
+        do{
+            let stmt = try conn.prepare(query)
+            for row in stmt {
+                allCollectionList.append(getIntRow(row: row, ind: 0))
+                allParentCollectionList.append(Int(row[1]! as! Int64))
+            }
+        } catch {
+            fatalError()
+        }
+        
+        if let collec = collection{
+            // If a collection was specified
+            if (includeSub){
+                // If a collection was specified and includeSub was chosen
+                collectionList.append(collec)
+                var anyAddition = true
+                while (anyAddition){
+                    anyAddition = false
+                    for (ind, col) in allCollectionList.enumerated() {
+                        let current_parent = allParentCollectionList[ind]!
+                        if(collectionList.contains(current_parent)){
+                            anyAddition = true
+                            collectionList.append(col)
+                        }
+                    }
+                }
+                
+            } else {
+                // If a collection was specified and includeSub was not chosen
+                collectionList.append(collec)
+            }
+        } else{
+            // If a collection was not specified
+            if (includeSub){
+                // If a collection was not specified and includeSub was chosen
+                collectionList = allCollectionList
+
+            } else {
+                // If a collection was not specified and includeSub was not chosen
+                collectionList = []
+            }
+        
+        }
+        
+        
+        
+        
+        return collectionList
     }
     
     /**
