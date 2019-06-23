@@ -167,6 +167,7 @@ class DatabaseMaster{
         // TODO: Implement General Filters
         // TODO: Implement Author Filters
         // TODO: Implement Output Order Control
+        // TODO: Update collection to be an Optional
         
         // Empty Array that will hold final list of valid Item IDs that will be included in output
         var validItemIDs : [Int] = []
@@ -269,7 +270,7 @@ class DatabaseMaster{
         // These checks are done separately because 1) the author info is in a different table 2) allows some items to be missing some data.
         let titleDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["title"]!, IDList: validItemIDs)
         let yearDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["date"]!, IDList:validItemIDs)
-        let authorDict : [Int: [authorStruct]] = getAuthor(ID_List : validItemIDs, onlyFirst : true)
+        let authorDict : [Int: [authorStruct]] = getAuthor(IDList : validItemIDs, onlyFirst : true)
 
         // Create Array of refSummary Structs with UUID set to ItemIDs
         var outputArray : [refSummary] = []
@@ -338,7 +339,7 @@ class DatabaseMaster{
         }
         
         // Separately get data for authors because thats in a different table
-        let authorDict : [Int: [authorStruct]] = getAuthor(ID_List : [UUID], onlyFirst : false)
+        let authorDict : [Int: [authorStruct]] = getAuthor(IDList : [UUID], onlyFirst : false)
         if let opt = authorDict[UUID] {
             if opt.count > 0 {
                 var authorString = ""
@@ -353,8 +354,6 @@ class DatabaseMaster{
         return propertyList
     }
     
-    
-    //MARK: Helper Functions
     /**
      This Method returns an array of Strings listing the tags for a given item
      
@@ -367,11 +366,11 @@ class DatabaseMaster{
     func tagsForItem(UUID : Int) -> [String]{
         var tagArray : [String] = []
         let query = """
-                    SELECT \(tags).\(name) FROM \(itemTags)
-                    JOIN \(tags)
-                    On \(itemTags).\(tagID) = \(tags).\(tagID)
-                    WHERE \(itemTags).\(itemID) = \(UUID)
-                    """
+        SELECT \(tags).\(name) FROM \(itemTags)
+        JOIN \(tags)
+        On \(itemTags).\(tagID) = \(tags).\(tagID)
+        WHERE \(itemTags).\(itemID) = \(UUID)
+        """
         do{
             let stmt = try conn.prepare(query)
             for row in stmt {
@@ -394,10 +393,10 @@ class DatabaseMaster{
         var tag_array : [tagContents] = []
         // Set up query
         let query = """
-                    SELECT Distinct \(itemTags).\(tagID), \(tags).\(name) FROM \(itemTags)
-                    JOIN \(tags)
-                    ON \(itemTags).\(tagID) = \(tags).\(tagID)
-                    """
+        SELECT Distinct \(itemTags).\(tagID), \(tags).\(name) FROM \(itemTags)
+        JOIN \(tags)
+        ON \(itemTags).\(tagID) = \(tags).\(tagID)
+        """
         do{
             let stmt = try conn.prepare(query)
             for row in stmt {
@@ -409,6 +408,7 @@ class DatabaseMaster{
         return tag_array
     }
     
+    //MARK: Helper Functions
     /**
      This Method returns the integer representation of a specified index of a connection Statement Element
      
@@ -433,7 +433,7 @@ class DatabaseMaster{
      
      - Tag: DatabaseMaster_populateDict
      */
-    func populateDict(dataID : Int, IDList : [Int] ) -> [Int : String]{        
+    func populateDict(dataID : Int, IDList : [Int] ) -> [Int : String]{
         var output : [Int : String] = [:]
         //I have no idea how this line works
         let IDListStr = IDList.map { String($0) }
@@ -457,15 +457,24 @@ class DatabaseMaster{
         return output
     }
     
-    func getAuthor(ID_List : [Int], onlyFirst : Bool) -> [Int : [authorStruct]]{
-        // TBD
+    /**
+     This Method returns a Dictionary mapping the specified IDs to an Array of Author Structs which contain the data about the authors of that item. Includes boolean to specify if only the "primary" author should be included.
+     
+     - Parameter IDList: The array of IDs for which we would like to find author(s) for
+     - Parameter onlyFirst: Boolean representing if we want multiple Authors returned or just the "primary" one
+     
+     - Returns: Dictionary of Int -> Array of [authorStruct](x-source-tag://authorStruct)
+     
+     - Tag: DatabaseMaster_getAuthor
+     */
+    func getAuthor(IDList : [Int], onlyFirst : Bool) -> [Int : [authorStruct]]{
         var output : [Int : [authorStruct]] = [:]
-        for id in ID_List{
+        for id in IDList{
             output[id] = nil
         }
         // Iterate over UUID
         // Select Join on authors where ID = ID
-        for id in ID_List{
+        for id in IDList{
             let query = """
                         SELECT \(creators).\(firstName), \(creators).\(lastName), \(creators).\(creatorID)
                         FROM \(itemCreators)
@@ -492,10 +501,31 @@ class DatabaseMaster{
         return output
     }
     
-    func getCollections(library : Int, collection: Int, includeSub: Bool) -> [Int]{
+    /**
+     This Method returns a list of collection in a given library and optionally a given collection. Includes option to include subdirectories of the specified library/collection
+     
+     - Parameter library: libraryID of the library of interest
+     - Parameter collection: Optional collectionID of a collection in library
+     - Parameter includeSub: Boolean specifying if sub-collections should be included
+     
+     - Returns: Array of Ints representing the valid collectionIDs
+     
+     - Tag: DatabaseMaster_getCollections
+     */
+    func getCollections(library : Int, collection : Int?, includeSub: Bool) -> [Int]{
+        //TODO: Write the function
         return []
     }
     
+    /**
+     This Method returns a list of itemIDs that have the specified Tags of Interest
+     
+     - Parameter tagList: Array of tagIDs
+     
+     - Returns: Array of Ints representing the itemIDs that have ANY of the Tags provided
+     
+     - Tag: DatabaseMaster_getItemsWithTag
+     */
     func getItemsWithTag(tagList : [Int]) -> [Int]{
         var itemIDs : [Int] = []
         var tagListStr : [String] = []
@@ -518,7 +548,17 @@ class DatabaseMaster{
         return itemIDs
     }
 
-    
+    /**
+     This Method returns a list of itemIDs that are either in 1) the interesection of the two sets or 2) the subtraction of the secondary set from the primary. The conversion from Array to Set implicitly removes duplicates
+     
+     - Parameter main: Primary Array of Ints representing itemIDs
+     - Parameter secondary: Secondary Array of Ints representing itemIDs
+     - Parameter incldueSecondary: Boolean representing if "Intersection" or "Subtraction" logic should be used
+     
+     - Returns: Array of Ints representing the itemIDs that are part of the intersected/subtracted sets
+     
+     - Tag: DatabaseMaster_itersectItemLists
+     */
     func intersectItemLists(main : [Int], secondary : [Int], includeSecondary : Bool) -> [Int]{
         var combinedList : [Int] = []
         let setMain =  Set(main)
