@@ -126,6 +126,7 @@ class DatabaseMaster{
     let libraryID = "libraryID"
     let libraryName = "libraryName"
     let itemID = "itemID"
+    let itemTypeID = "itemTypeID"
     let fieldID = "fieldID"
     let valueID = "valueID"
     let value = "value"
@@ -315,7 +316,22 @@ class DatabaseMaster{
     func prepareRefDetail(UUID: Int) -> [DetailPropertyCellContents]{
         var propertyList : [DetailPropertyCellContents] = []
         //TODO: Update Query to join on itemType and itemTypeFields to get a dispaly order
-        
+        // Determine the itemType of this UUID
+        let type_query = """
+                         SELECT \(itemTypeID)
+                         FROM \(items)
+                         WHERE \(itemID) = \(UUID)
+                         """
+        var curItemType = -1
+        do{
+            let type_stmt = try conn.prepare(type_query)
+            // Iterate over and add to property list
+            for row in type_stmt {
+                curItemType = getIntRow(row: row, ind: 0)
+            }
+        } catch {
+            fatalError()
+        }
         // Select the Join of fields required with fields with data
         let query = """
                     SELECT
@@ -326,7 +342,11 @@ class DatabaseMaster{
                     ON \(itemData).\(fieldID) = \(fields).\(fieldID)
                     INNER JOIN \(itemDataValues)
                     ON \(itemData).\(valueID) = \(itemDataValues).\(valueID)
+                    INNER JOIN \(itemTypeFields)
+                    ON \(itemTypeFields).\(fieldID) = \(fields).\(fieldID)
                     WHERE \(itemData).\(itemID) = \(UUID)
+                    AND \(itemTypeFields).\(itemTypeID) = \(curItemType)
+                    ORDER By \(itemTypeFields).\(orderIndex) ASC
                     """
         do{
             let stmt = try conn.prepare(query)
