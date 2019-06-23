@@ -10,7 +10,7 @@ import Foundation
 import SQLite
 
 /**
- - Tag: DatabaseMaster_refSummary
+ - Tag: refSummary
  */
 struct refSummary{
     var UUID = -1
@@ -27,7 +27,7 @@ struct refSummary{
 }
 
 /**
- - Tag: DatabaseMaster_authorStruct
+ - Tag: authorStruct
  */
 struct authorStruct{
     var firstName : String = ""
@@ -54,7 +54,7 @@ struct authorStruct{
 }
 
 /**
- - Tag: DatabaseMaster_tagFilter
+ - Tag: tagFilter
  */
 class tagFilter {
     var include : [Int]
@@ -92,7 +92,7 @@ class tagFilter {
     }
 }
 /**
- - Tag: DatabaseMaster_DatabaseMaster
+ - Tag: DatabaseMaster
  */
 class DatabaseMaster{
     //Mark: Properties
@@ -147,21 +147,21 @@ class DatabaseMaster{
         conn = try! Connection(dbPath, readonly: true)
     }
     
-    //Mark: Query Data to Display
+    //MARK: Query Data to Display
     /**
      This Method returns an array of <refSummary> Stucts which is used by the "RefList" View Controller to populate its table view with a list of all items meeting user chosen criteria. Includes functionality to return a list of items based on library, collection, tags, author (TBD), and general fitlers (TBD).
      
      - Parameter library: Library ID specifying where to pull items from
      - Parameter collection: Collection ID specifying where to pull items from
      - Parameter includeSub: Boolean specying where to include sub collections or not
-     - Parameter tagList: [tagFilter](x-source-tag://DatabaseMaster_tagFilter) Struct that specifies which tags to include or exclude
+     - Parameter tagList: [tagFilter](x-source-tag://tagFilter) Struct that specifies which tags to include or exclude
      - Parameter filterDict: TBD
      - Parameter authorDict: TBD
      - Parameter orderDict: TBD
      
-     - Returns: [refSummary](x-source-tag://DatabaseMaster_refSummary) Array
+     - Returns: [refSummary](x-source-tag://refSummary) Array
      
-     - Tag: DatabaseMaster_DatabaseMaster_prepareRefList
+     - Tag: DatabaseMaster_prepareRefList
      */
     func prepareRefList(library : Int, collection: Int, includeSub: Bool, tagList: tagFilter, filterDict: Any, authorDict: Any, orderDict: Any) -> [refSummary]{
         // TODO: Implement General Filters
@@ -267,8 +267,8 @@ class DatabaseMaster{
         
         // Create Dicts mapping UUID --> title, year, author
         // These checks are done separately because 1) the author info is in a different table 2) allows some items to be missing some data.
-        let titleDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["title"]!, ID_List: validItemIDs)
-        let yearDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["date"]!, ID_List:validItemIDs)
+        let titleDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["title"]!, IDList: validItemIDs)
+        let yearDict : [Int: String] = populateDict(dataID: fieldDict_id_lookup["date"]!, IDList:validItemIDs)
         let authorDict : [Int: [authorStruct]] = getAuthor(ID_List : validItemIDs, onlyFirst : true)
 
         // Create Array of refSummary Structs with UUID set to ItemIDs
@@ -309,7 +309,7 @@ class DatabaseMaster{
      
      - Returns: [DetailPropertyCellContents](x-source-tag://) Array
      
-     - Tag: DatabaseMaster_DatabaseMaster_prepareRefDetail
+     - Tag: DatabaseMaster_prepareRefDetail
      */
     func prepareRefDetail(UUID: Int) -> [DetailPropertyCellContents]{
         var propertyList : [DetailPropertyCellContents] = []
@@ -337,7 +337,7 @@ class DatabaseMaster{
             fatalError()
         }
         
-        // Separately get data for authors because they're in a different table
+        // Separately get data for authors because thats in a different table
         let authorDict : [Int: [authorStruct]] = getAuthor(ID_List : [UUID], onlyFirst : false)
         if let opt = authorDict[UUID] {
             if opt.count > 0 {
@@ -355,6 +355,15 @@ class DatabaseMaster{
     
     
     //MARK: Helper Functions
+    /**
+     This Method returns an array of Strings listing the tags for a given item
+     
+     - Parameter UUID: the itemID of the item of interest
+     
+     - Returns: [String] Array
+     
+     - Tag: DatabaseMaster_tagsForItem
+     */
     func tagsForItem(UUID : Int) -> [String]{
         var tagArray : [String] = []
         let query = """
@@ -374,6 +383,13 @@ class DatabaseMaster{
         return tagArray
     }
     
+    /**
+     This Method returns an array of tagContents which are used in the TagController to keep track of which tags are selected
+     
+     - Returns: [tagContents](x-source-tag://) Array
+     
+     - Tag: DatabaseMaster_getAllTags
+     */
     func getAllTags() -> [tagContents]{
         var tag_array : [tagContents] = []
         // Set up query
@@ -393,19 +409,41 @@ class DatabaseMaster{
         return tag_array
     }
     
-    //Mark: Utilitiy
+    /**
+     This Method returns the integer representation of a specified index of a connection Statement Element
+     
+     - Parameter row: The statement element row in question
+     - Parameter ind: The index of the row to be cast to int
+     
+     - Returns: Int value of the the row provided at the given index
+     
+     - Tag: DatabaseMaster_getIntRow
+     */
     func getIntRow(row : Statement.Element, ind : Int) -> Int{
         return Int(row[ind]! as! Int64)
     }
     
-    func populateDict(dataID : Int, ID_List : [Int] ) -> [Int : String]{
+    /**
+     This Method returns a dictionary of Int -> String which represents a mapping from itemID to the string representation of some specified data field.
+     
+     - Parameter dataID: The fieldID of the field of interest
+     - Parameter IDList: The list of IDs for which we would like to find this value for
+     
+     - Returns: Dictionary of Int -> String
+     
+     - Tag: DatabaseMaster_populateDict
+     */
+    func populateDict(dataID : Int, IDList : [Int] ) -> [Int : String]{        
         var output : [Int : String] = [:]
+        //I have no idea how this line works
+        let IDListStr = IDList.map { String($0) }
         let query = """
         SELECT \(itemData).\(itemID), \(itemDataValues).\(value)
         FROM \(itemData)
         INNER JOIN \(itemDataValues)
         ON \(itemData).\(valueID) = \(itemDataValues).\(valueID)
         Where \(itemData).\(fieldID) = \(dataID)
+        AND \(itemData).\(itemID) IN ( \(IDListStr.joined(separator: ", ")) )
         """
         do{
             let stmt = try conn.prepare(query)
@@ -480,16 +518,18 @@ class DatabaseMaster{
         return itemIDs
     }
 
+    
+    func intersectItemLists(main : [Int], secondary : [Int], includeSecondary : Bool) -> [Int]{
+        var combinedList : [Int] = []
+        let setMain =  Set(main)
+        let setSecondary = Set(secondary)
+        if(includeSecondary) {
+            combinedList = Array(setMain.intersection(setSecondary))
+        } else {
+            combinedList = Array(setMain.subtracting(setSecondary))
+        }
+        return combinedList
+    }
 }
 
-func intersectItemLists(main : [Int], secondary : [Int], includeSecondary : Bool) -> [Int]{
-    var combinedList : [Int] = []
-    let setMain =  Set(main)
-    let setSecondary = Set(secondary)
-    if(includeSecondary) {
-        combinedList = Array(setMain.intersection(setSecondary))
-    } else {
-        combinedList = Array(setMain.subtracting(setSecondary))
-    }
-    return combinedList
-}
+
