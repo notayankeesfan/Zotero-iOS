@@ -8,6 +8,19 @@
 
 import Foundation
 
-class ZoteroWebInterface{
+struct ItemFromJSON{
+    var id : Int
+    var creators : Any
+    // TBD
     
+    init(JSON: [String: Any]){
+        
+    }
+}
+class ZoteroWebInterface{
+    // MARK: Methods
+    // Connect to new Account
+    // Get all items
+    // Get one item
+    // Get updated items
 }
