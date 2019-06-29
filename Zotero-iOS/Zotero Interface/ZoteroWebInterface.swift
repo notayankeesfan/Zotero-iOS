@@ -14,7 +14,8 @@ struct ItemFromJSON{
     // TBD
     
     init(JSON: [String: Any]){
-        
+        id = -1
+        creators = -1
     }
 }
 class ZoteroWebInterface{
