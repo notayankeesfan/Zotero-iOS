@@ -9,6 +9,6 @@
 import Foundation
 
 struct AuthConstants{
-    let CLIENT_KEY = "key"
+    let CLIENT_KEY = "test key"
     let CLIENT_SECRET = "secret"
 }
