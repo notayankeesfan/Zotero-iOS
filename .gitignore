@@ -3,7 +3,7 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Ignore AuthConstants
-*AuthConstants.swift
+Zotero-iOS/Zotero Interface/AuthConstants.swift
 
 ## Build generated
 build/
