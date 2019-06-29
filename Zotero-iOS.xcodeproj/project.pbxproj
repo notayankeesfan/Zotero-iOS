@@ -14,7 +14,7 @@
 		935CA21022B5BB760020D6A1 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935CA20222B5BB4D0020D6A1 /* SQLite.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		935CA21222B5BFF30020D6A1 /* DatabaseMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */; };
 		937A54CB22B539D600243C14 /* RefListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937A54CA22B539D600243C14 /* RefListController.swift */; };
-		938A94C822C7055A00936625 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938A94C722C7055A00936625 /* AuthConstants.swift */; };
+		938A94CA22C70B1000936625 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938A94C922C70B1000936625 /* AuthConstants.swift */; };
 		93A11D0022B7462B001AD19E /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A11CFF22B7462B001AD19E /* TagTableViewCell.swift */; };
 		93A11D0222B74647001AD19E /* TagSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A11D0122B74647001AD19E /* TagSelectorViewController.swift */; };
 		93B4747D22AF503F00A0C17E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4747C22AF503F00A0C17E /* AppDelegate.swift */; };
@@ -102,7 +102,7 @@
 		935CA1F722B5BB4D0020D6A1 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../../../../../Downloads/SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		935CA21122B5BFF30020D6A1 /* DatabaseMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseMaster.swift; sourceTree = "<group>"; };
 		937A54CA22B539D600243C14 /* RefListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefListController.swift; sourceTree = "<group>"; };
-		938A94C722C7055A00936625 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
+		938A94C922C70B1000936625 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthConstants.swift; path = ../../../../../AuthConstants.swift; sourceTree = "<group>"; };
 		93A11CFF22B7462B001AD19E /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		93A11D0122B74647001AD19E /* TagSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSelectorViewController.swift; sourceTree = "<group>"; };
 		93B4747922AF503F00A0C17E /* Zotero-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zotero-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,7 +172,7 @@
 		938A94BF22C7030400936625 /* Zotero Interface */ = {
 			isa = PBXGroup;
 			children = (
-				938A94C722C7055A00936625 /* AuthConstants.swift */,
+				938A94C922C70B1000936625 /* AuthConstants.swift */,
 			);
 			path = "Zotero Interface";
 			sourceTree = "<group>";
@@ -488,7 +488,7 @@
 				93BC0C4922B36BA0002BC5A8 /* RefItemTableViewCell.swift in Sources */,
 				93A11D0222B74647001AD19E /* TagSelectorViewController.swift in Sources */,
 				9338B7AB22B8823D00F20D3D /* DetailTagController.swift in Sources */,
-				938A94C822C7055A00936625 /* AuthConstants.swift in Sources */,
+				938A94CA22C70B1000936625 /* AuthConstants.swift in Sources */,
 				93FB979E22B870DE00F12DA8 /* DetailTabBarController.swift in Sources */,
 				93006CF422B70E8B003F8620 /* DetailPropertyTableViewCell.swift in Sources */,
 			);
